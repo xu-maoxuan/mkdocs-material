@@ -1,0 +1,1515 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../../09/13/%E7%A1%AC%E5%B8%81%E8%BF%9E%E7%BB%AD100%E6%AC%A1%E9%83%BD%E6%98%AF%E6%AD%A3%E9%9D%A2/">
+      
+      
+      
+      <link rel="icon" href="../../../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.28">
+    
+    
+      
+        <title>线性回归知识与问题整理 - xmx.Spaceship</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../../assets/stylesheets/main.6543a935.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
+    
+    <script>__md_scope=new URL("../../../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../../../../.." title="xmx.Spaceship" class="md-header__button md-logo" aria-label="xmx.Spaceship" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            xmx.Spaceship
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              线性回归知识与问题整理
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../../.." class="md-tabs__link">
+        
+  
+    
+  
+  主页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../../../about_me/" class="md-tabs__link">
+        
+  
+    
+  
+  关于我
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../../../Notes/Quant/" class="md-tabs__link">
+          
+  
+  学习笔记
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../../../" class="md-tabs__link">
+          
+  
+  数理基础
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../../.." title="xmx.Spaceship" class="md-nav__button md-logo" aria-label="xmx.Spaceship" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    xmx.Spaceship
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    主页
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../../about_me/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    关于我
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    学习笔记
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            学习笔记
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Quant
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Quant
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../../Notes/Quant/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    所有文章
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../../Notes/Quant/tags/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    标签
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1_3" id="__nav_3_1_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    归档
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            归档
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../../Notes/Quant/archive/2024/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2024
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Python
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Python
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../../Notes/Python/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    所有文章
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../../Notes/Python/tags/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    标签
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_3" id="__nav_3_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    归档
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            归档
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../../Notes/Python/archive/2024/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2024
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ML&DL
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            ML&DL
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../../Notes/ML%26DL/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    所有文章
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../../Notes/ML%26DL/tags/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    标签
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3_3" id="__nav_3_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    归档
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            归档
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../../Notes/ML%26DL/archive/2024/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2024
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    数理基础
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            数理基础
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    刷题
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            刷题
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      <a href="../../../../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    所有文章
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../tags/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    标签
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1_3" id="__nav_4_1_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    归档
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            归档
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../archive/2024/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2024
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      基础
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="基础">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      线性回归的基本假设
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gauss-markov" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gauss-Markov 定理
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ols" class="md-nav__link">
+    <span class="md-ellipsis">
+      最小二乘法OLS
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#todo" class="md-nav__link">
+    <span class="md-ellipsis">
+      TODO 再写
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+  <div class="md-content md-content--post" data-md-component="content">
+    <div class="md-sidebar md-sidebar--post" data-md-component="sidebar" data-md-type="navigation">
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner md-post">
+          <nav class="md-nav md-nav--primary">
+            <div class="md-post__back">
+              <div class="md-nav__title md-nav__container">
+                <a href="../../../../" class="md-nav__link">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+                  <span class="md-ellipsis">
+                    回到主页
+                  </span>
+                </a>
+              </div>
+            </div>
+            
+            <ul class="md-post__meta md-nav__list">
+              <li class="md-nav__item md-nav__item--section">
+                <div class="md-post__title">
+                  <span class="md-ellipsis">
+                    元数据
+                  </span>
+                </div>
+                <nav class="md-nav">
+                  <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                      <div class="md-nav__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5v-5Z"/></svg>
+                        <time datetime="2024-10-01 00:00:00" class="md-ellipsis">2024年10月1日</time>
+                      </div>
+                    </li>
+                    
+                    
+                    
+                      
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7h1.5Z"/></svg>
+                          <span class="md-ellipsis">
+                            
+                              需要 4 分钟阅读时间
+                            
+                          </span>
+                        </div>
+                      </li>
+                    
+                  </ul>
+                </nav>
+              </li>
+            </ul>
+          </nav>
+          
+        </div>
+      </div>
+    </div>
+    <article class="md-content__inner md-typeset">
+      
+        
+  
+  
+
+<nav class="md-tags" >
+  
+    
+    
+    
+      <span class="md-tag">线性回归</span>
+    
+  
+    
+    
+    
+      <span class="md-tag">Quant</span>
+    
+  
+</nav>
+
+
+
+<p>整理线性回归的基础知识，并尝试解决常见的Quant笔面试的相关问题。</p>
+<!-- more -->
+
+<h2 id="_1">基础<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>线性回归模型：$ Y = X \beta + \epsilon $</p>
+<div class="arithmatex">\[ß
+    其中: E(X^T \epsilon)=0 \\
+    E(\epsilon) = E \left( \begin{bmatrix} \epsilon_1 \\ \epsilon_2 \\ \vdots \\ \epsilon_n \end{bmatrix} \right) = \begin{bmatrix} E(\epsilon_1) \\ E(\epsilon_2) \\ \vdots \\ E(\epsilon_n) \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \\ \vdots \\ 0 \end{bmatrix} = 0\\
+    \text{Var}(\epsilon) = E\left[ (\epsilon - E(\epsilon)) (\epsilon - E(\epsilon))^T \right] = E(\epsilon \epsilon^T)\\
+    = E \left( \begin{bmatrix} \epsilon_1 \\ \epsilon_2 \\ \vdots \\ \epsilon_n \end{bmatrix} \begin{bmatrix} \epsilon_1 &amp; \epsilon_2 &amp; \dots &amp; \epsilon_n \end{bmatrix} \right)\\
+    = E \left( \begin{bmatrix} \epsilon_1 \epsilon_1 &amp; \epsilon_1 \epsilon_2 &amp; \dots &amp; \epsilon_1 \epsilon_n \\ \epsilon_2 \epsilon_1 &amp; \epsilon_2 \epsilon_2 &amp; \dots &amp; \epsilon_2 \epsilon_n \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ \epsilon_n \epsilon_1 &amp; \epsilon_n \epsilon_2 &amp; \dots &amp; \epsilon_n \epsilon_n \end{bmatrix} \right)\\
+    = \begin{bmatrix} E(\epsilon_1, \epsilon_1) &amp; E(\epsilon_1, \epsilon_2) &amp; \dots &amp; E(\epsilon_1, \epsilon_n) \\ E(\epsilon_2, \epsilon_1) &amp; E(\epsilon_2, \epsilon_2) &amp; \dots &amp; E(\epsilon_2, \epsilon_n) \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ E(\epsilon_n, \epsilon_1) &amp; E(\epsilon_n, \epsilon_2) &amp; \dots &amp; E(\epsilon_n, \epsilon_n) \end{bmatrix}\\
+    = \begin{bmatrix} \sigma^2 &amp; 0 &amp; \dots &amp; 0 \\ 0 &amp; \sigma^2 &amp; \dots &amp; 0 \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ 0 &amp; 0 &amp; \dots &amp; \sigma^2 \end{bmatrix} = \sigma^2 I_n
+\]</div>
+<h3 id="_2"><strong>线性回归的基本假设</strong><a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>一共六大假设：</p>
+<ul>
+<li><code>Linear in Parameters</code></li>
+</ul>
+<p>线性参数假设，即因变量是自变量和随机误差的线性组合。</p>
+<p>The model in the population can be written as</p>
+<div class="arithmatex">\[ y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \dots + \beta_K x_K + u \]</div>
+<p>where <span class="arithmatex">\(\beta_0, \beta_1, \dots, \beta_K\)</span> are the unknown parameters (constants) of interest and <span class="arithmatex">\(u\)</span> is an unobservable random error or disturbance term.</p>
+<hr />
+<ul>
+<li><code>Random Sampling</code></li>
+</ul>
+<p>样本随机抽样假设，即样本从分布中抽取是随机的。</p>
+<p>We have a random sample of <span class="arithmatex">\(N\)</span> observations,</p>
+<div class="arithmatex">\[\{(x_{i1}, x_{i2}, \dots, x_{iK}, y_i)\}_{i=1}^N\]</div>
+<p>following the population model defined in MLR.1.</p>
+<hr />
+<ul>
+<li><code>No Perfect Collinearity</code></li>
+</ul>
+<p>无完全共线性假设，即自变量之间不能存在完全共线性的关系。实际中，自变量不能高度自相关。</p>
+<p><span class="arithmatex">\(Rank(X)=K 满秩\)</span>（暗含<span class="arithmatex">\(K \leq N\)</span>条件，即特征数/因子数小于样本数，否则无数组解）</p>
+<p>In the sample (and therefore in the population), none of the independent variables is constant, and there are no exact linear relationships among the independent variables.</p>
+<hr />
+<ul>
+<li><code>Zero Conditional Mean</code></li>
+</ul>
+<p>误差的零条件均值假设，即给定任何自变量时 u 的期望为0。</p>
+<p>The error <span class="arithmatex">\(u\)</span> has an expected value of zero given any value of the independent variables. In other words,</p>
+<div class="arithmatex">\[
+E(u|x_1, x_2, \dots, x_K) = 0.
+\]</div>
+<hr />
+<ul>
+<li><code>Homoskedasticity</code></li>
+</ul>
+<p>误差的同方差假设，误差在所有自变量取值下波动都是相同的。</p>
+<p>The error <span class="arithmatex">\(u_i\)</span> has the same variance given any values of the explanatory variables. In other words,</p>
+<div class="arithmatex">\[
+E(u_i^2 | x_1, x_2, \dots, x_K) = \sigma^2.
+\]</div>
+<hr />
+<ul>
+<li><code>Normality</code></li>
+</ul>
+<p>误差u和自变量独立并服从正态分布假设。</p>
+<p>The population error <span class="arithmatex">\(u\)</span> is independent of the explanatory variables <span class="arithmatex">\(x_1, x_2, \dots, x_K\)</span> and is normally distributed with zero mean and variance:
+[
+u \sim N(0, \sigma^2 I_n).
+]</p>
+<hr />
+<h3 id="gauss-markov">Gauss-Markov 定理<a class="headerlink" href="#gauss-markov" title="Permanent link">&para;</a></h3>
+<ul>
+<li>条件：
+    G-M定理的条件基本与上相符，除第6点误差正态分布假设，一共五点条件。在G-M定理中之要求误差项的方差为常数且独立分布，而不严格要求正态分布。如果想要进一步进行 <code>F检验</code> 和 <code>t检验</code>，则需要误差项为正态分布的假设。</li>
+</ul>
+<ul>
+<li>内容：当满足条件，普通最小二乘法 OLS 的估计系数是最优线性无偏估计量 <code>BLUE</code>(Best Linear Unbiased Estimator)<ul>
+<li>线性性：线性的模型</li>
+<li>无偏性：<span class="arithmatex">\(E(\epsilon_i|X)=0\)</span>，严格外生性</li>
+<li>独立性：<span class="arithmatex">\(\epsilon\)</span> 之间独立</li>
+<li>同方差性：<span class="arithmatex">\(Var(\epsilon_i|X)=\sigma^2\)</span></li>
+<li>无完全共线性</li>
+</ul>
+</li>
+</ul>
+<p>当然，如果只需要无偏性，则无需要求同方差性。</p>
+<hr />
+<h3 id="ols">最小二乘法OLS<a class="headerlink" href="#ols" title="Permanent link">&para;</a></h3>
+<p><strong><code>估计量推导</code></strong></p>
+<p>直接使用矩阵求解多元线性回归的估计量以及性质。</p>
+<p>对于多元线性回归模型，假设我们有 <span class="arithmatex">\( N \)</span> 个观测值和 <span class="arithmatex">\( K \)</span> 个自变量，回归模型可以写成矩阵形式为：</p>
+<div class="arithmatex">\[
+y = X\beta + u
+\]</div>
+<p>其中：</p>
+<ul>
+<li><span class="arithmatex">\( y \)</span> 是 <span class="arithmatex">\( N \times 1 \)</span> 的因变量向量（包含 <span class="arithmatex">\( N \)</span> 个观测值）。</li>
+<li><span class="arithmatex">\( X \)</span> 是 <span class="arithmatex">\( N \times (K+1) \)</span> 的自变量矩阵，其中第1列是全1向量（对应截距项），其余 <span class="arithmatex">\( K \)</span> 列是自变量。</li>
+<li><span class="arithmatex">\( \beta \)</span> 是 <span class="arithmatex">\( (K+1) \times 1 \)</span> 的回归系数向量，包含 <span class="arithmatex">\( \beta_0, \beta_1, \dots, \beta_K \)</span>。</li>
+<li><span class="arithmatex">\( u \)</span> 是 <span class="arithmatex">\( N \times 1 \)</span> 的误差项向量。</li>
+</ul>
+<p>求解最小化均方误差MSE or 残差平方和RSS（Residual Sum of Squares）：</p>
+<div class="arithmatex">\[ \underset{\beta}{min} \ RSS = (y - X\beta)^T (y - X\beta) \]</div>
+<p>为了得到最优的 <span class="arithmatex">\(\beta\)</span> 估计量 <span class="arithmatex">\(\hat{\beta}\)</span>，我们对 <span class="arithmatex">\( RSS \)</span> 对 <span class="arithmatex">\(\beta\)</span> 求导并令其为零：</p>
+<div class="arithmatex">\[
+\frac{\partial RSS}{\partial \beta} = \frac{\partial}{\partial \beta} \left( (y - X\beta)^T (y - X\beta) \right) = 0
+\]</div>
+<p>展开 RSS：</p>
+<div class="arithmatex">\[
+\begin{split}
+    RSS &amp;= (y - X\beta)^T (y - X\beta)\\
+    &amp;= y^T y - y^T X \beta - \beta^T X^T y + \beta^T X^T X \beta\\
+    &amp;= y^T y - 2 \beta^T X^T y + \beta^T X^T X \beta
+\end{split}
+\]</div>
+<div class="admonition note 矩阵求导">
+<p class="admonition-title">Note</p>
+<p>下面是使用到的简单矩阵求导公式：
+$$
+\frac{\partial \alpha^T \beta}{\partial \beta} = \alpha, \quad \frac{\partial \beta^T \alpha}{\partial \beta} = \alpha, \quad \frac{\partial (\beta^T \alpha \beta)}{\partial \beta} = 2 \alpha \beta.
+$$</p>
+</div>
+<p>对 <span class="arithmatex">\(\beta\)</span> 求导:
+$$
+\frac{\partial RSS}{\partial \beta} = - 2 X^T y + 2 X^T X \beta
+$$
+令导数为零：
+$$
+2 X^T y + 2 X^T X \beta = 0
+$$
+简化为：
+$$
+X^T X \beta = X^T y
+$$</p>
+<p>假设 <span class="arithmatex">\( X^T X \)</span> 可逆（即不存在完全的多重共线性），可以得到 OLS 估计量 <span class="arithmatex">\(\hat{\beta}\)</span>：
+$$
+\hat{\beta} = (X^T X)^{-1} X^T y
+$$</p>
+<div class="admonition note 特殊情况">
+<p class="admonition-title">Note</p>
+<ol>
+<li>
+<p>不带截距项，即过原点。此时 <span class="arithmatex">\(\beta\)</span> 公式不变，<span class="arithmatex">\(X\)</span> 中的第一列截距项全为0.</p>
+<p>当<span class="arithmatex">\(K=1\)</span>，只有一个自变量：<span class="arithmatex">\(\hat{\beta} = \frac{\sum^N_{i=1} x_{1i} y_{i}}{\sum^N_{i=1} x_{1i}^2}\)</span></p>
+</li>
+<li>
+<p>当<span class="arithmatex">\(K=2\)</span>，一个自变量+截距项。</p>
+<p>此时<span class="arithmatex">\(\beta_1,\beta_2\)</span>为基础的一元线性回归结果：
+<span class="arithmatex">\(<span class="arithmatex">\(截距项 \hat{\beta}_2 = \frac{\sum_{i=1}^{N}(x_{2i} - \bar{x}_2)(y_i - \bar{y})}{\sum_{i=1}^{N}(x_{2i} - \bar{x}_2)^2}\\
+系数 \hat{\beta}_1 = \bar{y} - \hat{\beta}_2 \bar{x}_2\)</span>\)</span></p>
+</li>
+</ol>
+</div>
+<p><strong><code>OLS估计量性质</code></strong></p>
+<p>OLS的性质：线性性(linear)、无偏性(unbiased)、有效性(efficient)、一致性(consistency)。</p>
+<p>无偏性的假设最弱；有效性次之；当大样本量时，讨论一致性。</p>
+<p>1.<strong>线性性</strong>：<span class="arithmatex">\(\hat{\beta}\)</span>是<span class="arithmatex">\(Y_i\)</span>的线性组合</p>
+<details class="note">
+<summary>证明线性性</summary>
+<h1 id="todo">TODO 再写<a class="headerlink" href="#todo" title="Permanent link">&para;</a></h1>
+</details>
+<p>2.<strong>无偏性Unbiased</strong>：<span class="arithmatex">\(E(\hat{\beta}|X)=\beta\)</span></p>
+<details class="note">
+<summary>证明无偏性</summary>
+<ul>
+<li>用到前提条件为：外生性/无偏性 <span class="arithmatex">\(E(u|X)=0\)</span></li>
+<li><span class="arithmatex">\(E(XY|X)=XE(Y|X)\)</span>
+证明如下：</li>
+</ul>
+<div class="arithmatex">\[
+\begin{split}
+\hat{\beta} &amp;= (X^TX)^{-1}X^Ty \\
+&amp;= (X^TX)^{-1} X^T(X\beta + u) = \beta + (X^TX)^{-1}X^Tu\\
+E(\hat{\beta}|X) &amp;= E(\beta + (X^TX)^{-1}X^Tu|X) \\
+&amp;= E(\beta|X) + (X^TX)^{-1}X^TE(u|X) = \beta\\
+\end{split}
+\]</div>
+</details>
+<p>3.<strong>有效性Enficiency</strong>：在所有线性的无偏估计量中，OLS具有最小的方差</p>
+<details class="note">
+<summary>证明有效性</summary>
+<p>有 <span class="arithmatex">\(\hat{\beta} = (X^T X)^{-1}X^Ty\)</span>.</p>
+<p>代入 <span class="arithmatex">\(y=X\beta + u\)</span>，有 <span class="arithmatex">\(\hat{\beta} = (X^T X)^{-1}X^T(X\beta+u)\)</span>.</p>
+<p>即 <span class="arithmatex">\(\hat{\beta} = \beta + (X^TX)^{-1} X^Tu\)</span>.</p>
+<p>有 <span class="arithmatex">\(Var(\hat{\beta}) = 0 + Var(Au)=AVar(u)A^T=\sigma^2(X^TX)^{-1}, 其中A=(X^TX)^{-1}X^T\)</span></p>
+<p>之后，即证明该方差是最小的。</p>
+</details>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+  
+
+
+
+      
+    </article>
+  </div>
+
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/xu-maoxuan" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../../../../..", "features": ["navigation.tabs", "navigation.sections"], "search": "../../../../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../../../../../assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      
+        <script src="../../../../../../javascripts/katex.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+      
+    
+  </body>
+</html>

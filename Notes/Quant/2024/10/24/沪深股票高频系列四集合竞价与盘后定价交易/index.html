@@ -1,0 +1,2118 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../../09/09/%E5%9B%A0%E5%AD%90%E7%BB%84%E5%90%88%E4%B8%AD%E7%9A%84%E6%B7%B7%E5%90%88%E6%B3%95%E5%92%8C%E6%95%B4%E5%90%88%E6%B3%95/">
+      
+      
+        <link rel="next" href="../%E6%B2%AA%E6%B7%B1%E8%82%A1%E7%A5%A8%E9%AB%98%E9%A2%91%E7%B3%BB%E5%88%97%E4%B8%89%E9%80%90%E7%AC%94%E6%95%B0%E6%8D%AE%E9%87%8D%E5%BB%BA%E4%B8%8E%E7%BB%86%E8%8A%82/">
+      
+      
+      <link rel="icon" href="../../../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.28">
+    
+    
+      
+        <title>沪深股票高频系列(四)——集合竞价与盘后定价交易 - xmx.Spaceship</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../../assets/stylesheets/main.6543a935.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
+    
+    <script>__md_scope=new URL("../../../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../../../../.." title="xmx.Spaceship" class="md-header__button md-logo" aria-label="xmx.Spaceship" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            xmx.Spaceship
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              沪深股票高频系列(四)——集合竞价与盘后定价交易
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../../.." class="md-tabs__link">
+        
+  
+    
+  
+  主页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../../../about_me/" class="md-tabs__link">
+        
+  
+    
+  
+  关于我
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../../../" class="md-tabs__link">
+          
+  
+  学习笔记
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../../../Math/problems/" class="md-tabs__link">
+          
+  
+  数理基础
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../../.." title="xmx.Spaceship" class="md-nav__button md-logo" aria-label="xmx.Spaceship" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    xmx.Spaceship
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    主页
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../../about_me/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    关于我
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    学习笔记
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            学习笔记
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Quant
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Quant
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      <a href="../../../../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    所有文章
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../tags/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    标签
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1_3" id="__nav_3_1_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    归档
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            归档
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../archive/2024/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2024
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Python
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Python
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Python/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    所有文章
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Python/tags/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    标签
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_3" id="__nav_3_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    归档
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            归档
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Python/archive/2024/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2024
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    ML&DL
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            ML&DL
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../ML%26DL/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    所有文章
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../ML%26DL/tags/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    标签
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3_3" id="__nav_3_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    归档
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            归档
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../ML%26DL/archive/2024/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2024
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    数理基础
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            数理基础
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    刷题
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            刷题
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../../Math/problems/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    所有文章
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../../Math/problems/tags/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    标签
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1_3" id="__nav_4_1_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    归档
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            归档
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../../Math/problems/archive/2024/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2024
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      集合竞价交易规则
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="集合竞价交易规则">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      申报和撤单
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      撮合成交
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      行情数据
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      成交价格
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      集合竞价 Level-2 数据
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="集合竞价 Level-2 数据">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      上交所
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="上交所">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      申报和撤单
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      撮合成交
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      成交价的确认
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      深交所
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      盘后固定价格交易
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+  <div class="md-content md-content--post" data-md-component="content">
+    <div class="md-sidebar md-sidebar--post" data-md-component="sidebar" data-md-type="navigation">
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner md-post">
+          <nav class="md-nav md-nav--primary">
+            <div class="md-post__back">
+              <div class="md-nav__title md-nav__container">
+                <a href="../../../../" class="md-nav__link">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+                  <span class="md-ellipsis">
+                    回到主页
+                  </span>
+                </a>
+              </div>
+            </div>
+            
+            <ul class="md-post__meta md-nav__list">
+              <li class="md-nav__item md-nav__item--section">
+                <div class="md-post__title">
+                  <span class="md-ellipsis">
+                    元数据
+                  </span>
+                </div>
+                <nav class="md-nav">
+                  <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                      <div class="md-nav__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5v-5Z"/></svg>
+                        <time datetime="2024-10-24 00:00:00" class="md-ellipsis">2024年10月24日</time>
+                      </div>
+                    </li>
+                    
+                    
+                    
+                      
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7h1.5Z"/></svg>
+                          <span class="md-ellipsis">
+                            
+                              需要 5 分钟阅读时间
+                            
+                          </span>
+                        </div>
+                      </li>
+                    
+                  </ul>
+                </nav>
+              </li>
+            </ul>
+          </nav>
+          
+        </div>
+      </div>
+    </div>
+    <article class="md-content__inner md-typeset">
+      
+        
+  
+  
+
+<nav class="md-tags" >
+  
+    
+    
+    
+      <span class="md-tag">高频交易</span>
+    
+  
+    
+    
+    
+      <span class="md-tag">股票</span>
+    
+  
+    
+    
+    
+      <span class="md-tag">A股</span>
+    
+  
+</nav>
+
+
+
+  <h1>沪深股票高频系列(四)——集合竞价与盘后定价交易</h1>
+
+<p>✨ 沪深股票高频系列 ✨的第四章：</p>
+<div class="codehilite"><pre><span></span><code>本文详细解答了：集合竞价与盘后竞价，补充了前文只有连续竞价的疏漏。
+</code></pre></div>
+
+<!-- more -->
+
+<p>在<code>逐笔数据重建细节</code>主要介绍了<code>连续竞价</code>情况，本文详细讲解<code>集合竞价</code>和<code>盘后交易</code>情况。</p>
+<p><img alt="竞价时间图" src="../../../../image/hft_china_equity/auction_time.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">clickhouse_driver</span> <span class="kn">import</span> <span class="n">Client</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span>
+    <span class="n">host</span><span class="o">=</span><span class="s2">&quot;192.168.36.170&quot;</span><span class="p">,</span>
+    <span class="n">port</span><span class="o">=</span><span class="mi">9000</span><span class="p">,</span>
+    <span class="n">database</span><span class="o">=</span><span class="s2">&quot;hfdata&quot;</span><span class="p">,</span>
+    <span class="n">user</span><span class="o">=</span><span class="s2">&quot;reader&quot;</span><span class="p">,</span>
+    <span class="n">password</span><span class="o">=</span><span class="s2">&quot;123456&quot;</span>
+<span class="p">)</span>
+</code></pre></div>
+<h2 id="_1">集合竞价交易规则<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>集合竞价：在规定时间内接受的买卖申报一次性集中撮合的竞价方式。集合竞价阶段未成交的买卖申报，自动进入当日后续竞价交易阶段，且沪深交易所规则一致。</p>
+<p>下表展示股票集合竞价的规则：</p>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>申报</th>
+<th>撤单</th>
+<th>撮合成交</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>9:15-9:20</td>
+<td>√</td>
+<td>√</td>
+<td>x</td>
+</tr>
+<tr>
+<td>9:20-9:25</td>
+<td>√</td>
+<td>x</td>
+<td>x</td>
+</tr>
+<tr>
+<td>9:25-9:30</td>
+<td>x</td>
+<td>x</td>
+<td>√</td>
+</tr>
+<tr>
+<td>11:30-13:00</td>
+<td>√</td>
+<td>x</td>
+<td>x</td>
+</tr>
+<tr>
+<td>14:57-15:00</td>
+<td>√</td>
+<td>x</td>
+<td>√</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_2">申报和撤单<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>9:15-9:20</code>：挂单可以申请撤单，并不会实际成交，但是会按照集合竞价交易规则虚拟撮合，并显示行情</li>
+<li><code>9:20-9:25</code> 和 <code>14:57-15:00</code>：只接受申报，不接受撤单</li>
+<li><code>11:30-13:00</code>：可以向券商申报和撤单，但都不进入交易所交易主机，待后续连续竞价处理</li>
+</ul>
+<h3 id="_3">撮合成交<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>9:25:01</code>：瞬时将之前所有申报单一次性撮合成交</li>
+<li><code>15:00:01</code>：瞬时将尾盘集合竞价报单一次性撮合</li>
+</ul>
+<h3 id="_4">行情数据<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>在 <code>9:15-9:25</code> 和 <code>14:57-15:00</code> 集合竞价期间，因为还没到集合撮合时间，此时的行情为<strong>虚拟行情</strong>，包括：<strong>虚拟参考价格</strong>、<strong>虚拟匹配量</strong>、<strong>虚拟未成交数量</strong>。</p>
+<p>因此，在可撤单的集合竞价时间段，可以通过不断报单和撤单构建虚假的行情，此时的虚拟行情是不可靠的。而不可撤单的集合竞价时间，虚拟行情具有一定的参考价值。</p>
+<h3 id="_5">成交价格<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>集合竞价并不按照时间优先原则，而是按照价格优先原则，相同的价格再按照到达系统的时间排序。</p>
+</div>
+<p>集合竞价的成交价格确定规则如下：</p>
+<ol>
+<li>
+<p>可实现最大成交量的价格</p>
+</li>
+<li>
+<p>高于该价格的买入申报、低于该价格的卖出申报全部成交的价格</p>
+</li>
+<li>
+<p>与该价格相同的买方或卖方至少有一方全部成交的价格</p>
+</li>
+</ol>
+<p>当存在多个符合规则的价格，上交所和深交所具有不同的处理方式（集合竞价的所有交易以同一价格成交）：</p>
+<ul>
+<li>上交所：两个以上符合条件的申报价格，取使未成交量最小的申报价格为成交价格。如果仍有两个以上的符合价格，使其中间价为成交价格。</li>
+<li>深交所：两个以上符合条件的申报价格，取该价格以下的买入申报累计算量之差最小的价格为成交价格。若存在相等情况，开盘集合竞价取最接近近期收盘价的价格，盘中、盘尾集合竞价取最接近成交价的价格。</li>
+</ul>
+<h2 id="level-2">集合竞价 Level-2 数据<a class="headerlink" href="#level-2" title="Permanent link">&para;</a></h2>
+<h3 id="_6">上交所<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">order_sql</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">SELECT * </span>
+<span class="s2">FROM </span>
+<span class="s2">    hfdata.stock_order </span>
+<span class="s2">WHERE </span>
+<span class="s2">    tradett = &#39;2021-12-20&#39; </span>
+<span class="s2">    AND windcode = &#39;600000.SH&#39;</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="n">order_data</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">query_dataframe</span><span class="p">(</span><span class="n">order_sql</span><span class="p">)</span>
+<span class="n">order_data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</code></pre></div>
+<p>样例数据：</p>
+<table>
+<thead>
+<tr>
+<th>windcode</th>
+<th>tradett</th>
+<th>tradetime</th>
+<th>bs</th>
+<th>orderprice</th>
+<th>orderqty</th>
+<th>orderno</th>
+<th>pricetype</th>
+<th>applseqnum</th>
+<th>updatetime</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>600000.SH</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:15:00.170</td>
+<td>1</td>
+<td>7.71</td>
+<td>100</td>
+<td>213</td>
+<td>0</td>
+<td>168508</td>
+<td>2022-10-28 23:03:01.450</td>
+</tr>
+<tr>
+<td>600000.SH</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:15:00.170</td>
+<td>1</td>
+<td>7.79</td>
+<td>100</td>
+<td>236</td>
+<td>0</td>
+<td>168509</td>
+<td>2022-10-28 23:03:01.450</td>
+</tr>
+<tr>
+<td>600000.SH</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:15:00.210</td>
+<td>1</td>
+<td>7.79</td>
+<td>100</td>
+<td>343</td>
+<td>0</td>
+<td>168510</td>
+<td>2022-10-28 23:03:01.450</td>
+</tr>
+</tbody>
+</table>
+<h4 id="_7">申报和撤单<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h4>
+<p>如下，最后一笔撤单在 <code>09:19:16.560</code>。因为按照规则，在 <code>09:20:00</code> 之后不能撤单。</p>
+<div class="highlight"><pre><span></span><code><span class="n">order_data</span><span class="p">[(</span><span class="n">order_data</span><span class="p">[</span><span class="s1">&#39;tradetime&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="s1">&#39;2021-12-20 09:30:00.000&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">order_data</span><span class="p">[</span><span class="s1">&#39;pricetype&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">10</span><span class="p">)]</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>windcode</th>
+<th>tradett</th>
+<th>tradetime</th>
+<th>bs</th>
+<th>orderprice</th>
+<th>orderqty</th>
+<th>orderno</th>
+<th>pricetype</th>
+<th>applseqnum</th>
+<th>updatetime</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>600000.SH</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:18:52.740</td>
+<td>1</td>
+<td>7.71</td>
+<td>100</td>
+<td>157670</td>
+<td>10</td>
+<td>170432</td>
+<td>2022-10-28 23:03:01.450</td>
+</tr>
+<tr>
+<td>600000.SH</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:19:04.060</td>
+<td>1</td>
+<td>8.52</td>
+<td>3700</td>
+<td>9597</td>
+<td>10</td>
+<td>170440</td>
+<td>2022-10-28 23:03:01.450</td>
+</tr>
+<tr>
+<td>600000.SH</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:19:16.560</td>
+<td>2</td>
+<td>8.14</td>
+<td>800</td>
+<td>154364</td>
+<td>10</td>
+<td>170447</td>
+<td>2022-10-28 23:03:01.450</td>
+</tr>
+</tbody>
+</table>
+<p>如下，<code>09:15-09:25</code> 之间都有申报，而 <code>09:25-09:30</code> 之间没有申报。</p>
+<div class="highlight"><pre><span></span><code><span class="n">order_data</span><span class="p">[(</span><span class="n">order_data</span><span class="p">[</span><span class="s1">&#39;tradetime&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="s1">&#39;2021-12-20 09:25:00.000&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">order_data</span><span class="p">[</span><span class="s1">&#39;pricetype&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)]</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>windcode</th>
+<th>tradett</th>
+<th>tradetime</th>
+<th>bs</th>
+<th>orderprice</th>
+<th>orderqty</th>
+<th>orderno</th>
+<th>pricetype</th>
+<th>applseqnum</th>
+<th>updatetime</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>600000.SH</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:15:00.170</td>
+<td>1</td>
+<td>7.71</td>
+<td>100</td>
+<td>213</td>
+<td>0</td>
+<td>168508</td>
+<td>2022-10-28 23:03:01.450</td>
+</tr>
+<tr>
+<td>600000.SH</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:15:00.170</td>
+<td>1</td>
+<td>7.79</td>
+<td>100</td>
+<td>236</td>
+<td>0</td>
+<td>168509</td>
+<td>2022-10-28 23:03:01.450</td>
+</tr>
+<tr>
+<td>600000.SH</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:15:00.210</td>
+<td>1</td>
+<td>7.79</td>
+<td>100</td>
+<td>343</td>
+<td>0</td>
+<td>168510</td>
+<td>2022-10-28 23:03:01.450</td>
+</tr>
+<tr>
+<td>600000.SH</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:15:00.280</td>
+<td>1</td>
+<td>7.71</td>
+<td>100</td>
+<td>379</td>
+<td>0</td>
+<td>168511</td>
+<td>2022-10-28 23:03:01.450</td>
+</tr>
+<tr>
+<td>600000.SH</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:15:00.280</td>
+<td>1</td>
+<td>8.50</td>
+<td>200</td>
+<td>387</td>
+<td>0</td>
+<td>168512</td>
+<td>2022-10-28 23:03:01.450</td>
+</tr>
+<tr>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr>
+<td>600000.SH</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:24:58.090</td>
+<td>1</td>
+<td>8.51</td>
+<td>3500</td>
+<td>231091</td>
+<td>0</td>
+<td>170738</td>
+<td>2022-10-28 23:03:01.450</td>
+</tr>
+<tr>
+<td>600000.SH</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:24:58.400</td>
+<td>2</td>
+<td>8.69</td>
+<td>500</td>
+<td>231349</td>
+<td>0</td>
+<td>170739</td>
+<td>2022-10-28 23:03:01.450</td>
+</tr>
+<tr>
+<td>600000.SH</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:24:58.460</td>
+<td>1</td>
+<td>8.49</td>
+<td>700</td>
+<td>231384</td>
+<td>0</td>
+<td>170740</td>
+<td>2022-10-28 23:03:01.450</td>
+</tr>
+<tr>
+<td>600000.SH</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:24:58.670</td>
+<td>1</td>
+<td>8.52</td>
+<td>500</td>
+<td>231553</td>
+<td>0</td>
+<td>170741</td>
+<td>2022-10-28 23:03:01.450</td>
+</tr>
+<tr>
+<td>600000.SH</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:24:59.110</td>
+<td>1</td>
+<td>9.41</td>
+<td>4300</td>
+<td>231885</td>
+<td>0</td>
+<td>170742</td>
+<td>2022-10-28 23:03:01.450</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="n">order_data</span><span class="p">[(</span><span class="n">order_data</span><span class="p">[</span><span class="s1">&#39;tradetime&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="s1">&#39;2021-12-20 09:25:00.000&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">order_data</span><span class="p">[</span><span class="s1">&#39;tradetime&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="s1">&#39;2021-12-20 09:30:00.000&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">order_data</span><span class="p">[</span><span class="s1">&#39;pricetype&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)]</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>windcode</th>
+<th>tradett</th>
+<th>tradetime</th>
+<th>bs</th>
+<th>orderprice</th>
+<th>orderqty</th>
+<th>orderno</th>
+<th>pricetype</th>
+<th>applseqnum</th>
+<th>updatetime</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="_8">撮合成交<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h4>
+<p>如下，早盘集合竞价的所有成交都是在 <code>09:25</code> 之后的某一时间同一时间完成，并且拥有相同的成交价 <code>tradeprice</code>。</p>
+<div class="highlight"><pre><span></span><code><span class="n">deal_sql</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">SELECT *</span>
+<span class="s2">FROM </span>
+<span class="s2">    hfdata.stock_deal</span>
+<span class="s2">WHERE</span>
+<span class="s2">    tradett = &#39;2021-12-20&#39;</span>
+<span class="s2">    AND windcode = &#39;600000.SH&#39;</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">deal_data</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">query_dataframe</span><span class="p">(</span><span class="n">deal_sql</span><span class="p">)</span>
+<span class="n">deal_data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>windcode</th>
+<th>tradett</th>
+<th>tradetime</th>
+<th>bs</th>
+<th>tradeprice</th>
+<th>tradeqty</th>
+<th>tradeamt</th>
+<th>tradeno</th>
+<th>tradebuyno</th>
+<th>tradesellno</th>
+<th>tradetype</th>
+<th>applseqnum</th>
+<th>updatetime</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>600000.SH</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:25:00.220</td>
+<td>0</td>
+<td>8.55</td>
+<td>100</td>
+<td>855.0</td>
+<td>17127</td>
+<td>172164</td>
+<td>57994</td>
+<td>0</td>
+<td>170743</td>
+<td>2022-10-28 23:45:47.004</td>
+</tr>
+<tr>
+<td>600000.SH</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:25:00.220</td>
+<td>0</td>
+<td>8.55</td>
+<td>100</td>
+<td>855.0</td>
+<td>17128</td>
+<td>220735</td>
+<td>57994</td>
+<td>0</td>
+<td>170744</td>
+<td>2022-10-28 23:45:47.004</td>
+</tr>
+<tr>
+<td>600000.SH</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:25:00.220</td>
+<td>0</td>
+<td>8.55</td>
+<td>200</td>
+<td>1710.0</td>
+<td>17129</td>
+<td>220735</td>
+<td>135904</td>
+<td>0</td>
+<td>170745</td>
+<td>2022-10-28 23:45:47.004</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="n">deal_data</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">query_dataframe</span><span class="p">(</span><span class="n">deal_sql</span><span class="p">)</span>
+<span class="n">deal_data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>windcode</th>
+<th>tradett</th>
+<th>tradetime</th>
+<th>bs</th>
+<th>tradeprice</th>
+<th>tradeqty</th>
+<th>tradeamt</th>
+<th>tradeno</th>
+<th>tradebuyno</th>
+<th>tradesellno</th>
+<th>tradetype</th>
+<th>applseqnum</th>
+<th>updatetime</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>600000.SH</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:25:00.220</td>
+<td>0</td>
+<td>8.55</td>
+<td>100</td>
+<td>855.0</td>
+<td>17127</td>
+<td>172164</td>
+<td>57994</td>
+<td>0</td>
+<td>170743</td>
+<td>2022-10-28 23:45:47.004</td>
+</tr>
+<tr>
+<td>600000.SH</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:25:00.220</td>
+<td>0</td>
+<td>8.55</td>
+<td>100</td>
+<td>855.0</td>
+<td>17128</td>
+<td>220735</td>
+<td>57994</td>
+<td>0</td>
+<td>170744</td>
+<td>2022-10-28 23:45:47.004</td>
+</tr>
+<tr>
+<td>600000.SH</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:25:00.220</td>
+<td>0</td>
+<td>8.55</td>
+<td>200</td>
+<td>1710.0</td>
+<td>17129</td>
+<td>220735</td>
+<td>135904</td>
+<td>0</td>
+<td>170745</td>
+<td>2022-10-28 23:45:47.004</td>
+</tr>
+<tr>
+<td>600000.SH</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:25:00.220</td>
+<td>0</td>
+<td>8.55</td>
+<td>100</td>
+<td>855.0</td>
+<td>17130</td>
+<td>220735</td>
+<td>155319</td>
+<td>0</td>
+<td>170746</td>
+<td>2022-10-28 23:45:47.004</td>
+</tr>
+<tr>
+<td>600000.SH</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:25:00.220</td>
+<td>0</td>
+<td>8.55</td>
+<td>200</td>
+<td>1710.0</td>
+<td>17131</td>
+<td>220735</td>
+<td>156318</td>
+<td>0</td>
+<td>170747</td>
+<td>2022-10-28 23:45:47.004</td>
+</tr>
+<tr>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr>
+<td>600000.SH</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:25:00.220</td>
+<td>0</td>
+<td>8.55</td>
+<td>1200</td>
+<td>10260.0</td>
+<td>17232</td>
+<td>159367</td>
+<td>217547</td>
+<td>0</td>
+<td>170848</td>
+<td>2022-10-28 23:45:47.004</td>
+</tr>
+<tr>
+<td>600000.SH</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:25:00.220</td>
+<td>0</td>
+<td>8.55</td>
+<td>100</td>
+<td>855.0</td>
+<td>17233</td>
+<td>159367</td>
+<td>217971</td>
+<td>0</td>
+<td>170849</td>
+<td>2022-10-28 23:45:47.004</td>
+</tr>
+<tr>
+<td>600000.SH</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:25:00.220</td>
+<td>0</td>
+<td>8.55</td>
+<td>132</td>
+<td>1128.6</td>
+<td>17234</td>
+<td>159367</td>
+<td>230664</td>
+<td>0</td>
+<td>170850</td>
+<td>2022-10-28 23:45:47.004</td>
+</tr>
+<tr>
+<td>600000.SH</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:25:00.220</td>
+<td>0</td>
+<td>8.55</td>
+<td>2000</td>
+<td>17100.0</td>
+<td>17235</td>
+<td>162369</td>
+<td>230664</td>
+<td>0</td>
+<td>170851</td>
+<td>2022-10-28 23:45:47.004</td>
+</tr>
+<tr>
+<td>600000.SH</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:25:00.220</td>
+<td>0</td>
+<td>8.55</td>
+<td>368</td>
+<td>3146.4</td>
+<td>17236</td>
+<td>162577</td>
+<td>230664</td>
+<td>0</td>
+<td>170852</td>
+<td>2022-10-28 23:45:47.004</td>
+</tr>
+</tbody>
+</table>
+<h4 id="_9">成交价的确认<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h4>
+<p>按照上文的规则，我们对买卖队列按照价格优先，其次时间顺序的次序进行排序，按照上述规则确认成交价格。</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 集合竞价的委托单，去除撤单，并按照价格顺序排列</span>
+<span class="n">open_bid</span> <span class="o">=</span> <span class="n">order_data</span><span class="p">[(</span><span class="n">order_data</span><span class="p">[</span><span class="s1">&#39;tradetime&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="s1">&#39;2021-12-20 09:30:00.000&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">order_data</span><span class="p">[</span><span class="s1">&#39;bs&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">order_data</span><span class="p">[</span><span class="s1">&#39;pricetype&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">10</span><span class="p">)]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;orderprice&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">open_ask</span> <span class="o">=</span> <span class="n">order_data</span><span class="p">[(</span><span class="n">order_data</span><span class="p">[</span><span class="s1">&#39;tradetime&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="s1">&#39;2021-12-20 09:30:00.000&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">order_data</span><span class="p">[</span><span class="s1">&#39;bs&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">order_data</span><span class="p">[</span><span class="s1">&#39;pricetype&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">10</span><span class="p">)]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;orderprice&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+<p>得到申报列表后，可以逐个价位去验证并确认成交价格。</p>
+<h4 id="_10">深交所<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h4>
+<p>深交所逻辑和上交所一样，只需要注意撤单的记录方法和上交所不同。</p>
+<h2 id="_11">盘后固定价格交易<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
+<p>对于<code>科创板</code>、<code>创业板</code>股票，投资者可以通过盘后固定价格交易：</p>
+<ul>
+<li>定义：在收盘集合竞价结束后，交易系统按照时间优先顺序对收盘定价申报进行撮合，并以当日收盘价成交。</li>
+<li>撮合价格：当日收盘成交价</li>
+<li>撮合顺序：时间优先顺序</li>
+<li>行情数据：<code>15:05-15:30</code>中，盘后固定价格交易阶段的申报和成交纳入即时行情，包含盘外的盘后固定价格交易的当日累计成交数、当日累计成交金额、买卖的实时申报数量。</li>
+</ul>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+  
+
+
+
+      
+    </article>
+  </div>
+
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/xu-maoxuan" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../../../../..", "features": ["navigation.tabs", "navigation.sections"], "search": "../../../../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../../../../../assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      
+        <script src="../../../../../../javascripts/katex.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+      
+    
+  </body>
+</html>

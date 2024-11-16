@@ -1,0 +1,3081 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../%E6%B2%AA%E6%B7%B1%E8%82%A1%E7%A5%A8%E9%AB%98%E9%A2%91%E7%B3%BB%E5%88%97%E5%9B%9B%E9%9B%86%E5%90%88%E7%AB%9E%E4%BB%B7%E4%B8%8E%E7%9B%98%E5%90%8E%E5%AE%9A%E4%BB%B7%E4%BA%A4%E6%98%93/">
+      
+      
+        <link rel="next" href="../%E6%B2%AA%E6%B7%B1%E8%82%A1%E7%A5%A8%E9%AB%98%E9%A2%91%E7%B3%BB%E5%88%97%E4%BA%8C%E9%80%90%E7%AC%94%E6%95%B0%E6%8D%AE%E5%AD%97%E6%AE%B5/">
+      
+      
+      <link rel="icon" href="../../../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.28">
+    
+    
+      
+        <title>沪深股票高频系列(三)——逐笔数据重建与细节 - xmx.Spaceship</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../../assets/stylesheets/main.6543a935.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
+    
+    <script>__md_scope=new URL("../../../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../../../../.." title="xmx.Spaceship" class="md-header__button md-logo" aria-label="xmx.Spaceship" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            xmx.Spaceship
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              沪深股票高频系列(三)——逐笔数据重建与细节
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../../.." class="md-tabs__link">
+        
+  
+    
+  
+  主页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../../../about_me/" class="md-tabs__link">
+        
+  
+    
+  
+  关于我
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../../../" class="md-tabs__link">
+          
+  
+  学习笔记
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../../../Math/problems/" class="md-tabs__link">
+          
+  
+  数理基础
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../../.." title="xmx.Spaceship" class="md-nav__button md-logo" aria-label="xmx.Spaceship" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    xmx.Spaceship
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    主页
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../../about_me/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    关于我
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    学习笔记
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            学习笔记
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Quant
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Quant
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      <a href="../../../../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    所有文章
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../tags/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    标签
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1_3" id="__nav_3_1_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    归档
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            归档
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../archive/2024/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2024
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Python
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Python
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Python/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    所有文章
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Python/tags/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    标签
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_3" id="__nav_3_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    归档
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            归档
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Python/archive/2024/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2024
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    ML&DL
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            ML&DL
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../ML%26DL/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    所有文章
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../ML%26DL/tags/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    标签
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3_3" id="__nav_3_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    归档
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            归档
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../ML%26DL/archive/2024/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2024
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    数理基础
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            数理基础
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    刷题
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            刷题
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../../Math/problems/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    所有文章
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../../Math/problems/tags/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    标签
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1_3" id="__nav_4_1_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    归档
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            归档
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../../Math/problems/archive/2024/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2024
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      上海交易所
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="上海交易所">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      逐笔委托
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      逐笔成交
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      逐笔委托与成交的关联
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      一次性撮合成交
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      撤单
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      深圳交易所
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="深圳交易所">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      逐笔委托
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      逐笔成交
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      逐笔委托与成交的关联
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      一次性撮合成交
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      撤单
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      其余细节
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="其余细节">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      实时数据的推送方式
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="实时数据的推送方式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      沪深差异
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      快照延迟
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+  <div class="md-content md-content--post" data-md-component="content">
+    <div class="md-sidebar md-sidebar--post" data-md-component="sidebar" data-md-type="navigation">
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner md-post">
+          <nav class="md-nav md-nav--primary">
+            <div class="md-post__back">
+              <div class="md-nav__title md-nav__container">
+                <a href="../../../../" class="md-nav__link">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+                  <span class="md-ellipsis">
+                    回到主页
+                  </span>
+                </a>
+              </div>
+            </div>
+            
+            <ul class="md-post__meta md-nav__list">
+              <li class="md-nav__item md-nav__item--section">
+                <div class="md-post__title">
+                  <span class="md-ellipsis">
+                    元数据
+                  </span>
+                </div>
+                <nav class="md-nav">
+                  <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                      <div class="md-nav__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5v-5Z"/></svg>
+                        <time datetime="2024-10-24 00:00:00" class="md-ellipsis">2024年10月24日</time>
+                      </div>
+                    </li>
+                    
+                    
+                    
+                      
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7h1.5Z"/></svg>
+                          <span class="md-ellipsis">
+                            
+                              需要 12 分钟阅读时间
+                            
+                          </span>
+                        </div>
+                      </li>
+                    
+                  </ul>
+                </nav>
+              </li>
+            </ul>
+          </nav>
+          
+        </div>
+      </div>
+    </div>
+    <article class="md-content__inner md-typeset">
+      
+        
+  
+  
+
+<nav class="md-tags" >
+  
+    
+    
+    
+      <span class="md-tag">高频交易</span>
+    
+  
+    
+    
+    
+      <span class="md-tag">股票</span>
+    
+  
+    
+    
+    
+      <span class="md-tag">A股</span>
+    
+  
+</nav>
+
+
+
+  <h1>沪深股票高频系列(三)——逐笔数据重建与细节</h1>
+
+<p>✨ 沪深股票高频系列 ✨的第三章：</p>
+<div class="codehilite"><pre><span></span><code>本文详细解答了：为何重建？如何重建准确的逐笔数据？对于使用代码实践的方法，文章中也给出了一定的建议（方法的选取建议参考个人的研究环境和要求）。
+</code></pre></div>
+
+<!-- more -->
+
+<p>本文分别介绍沪深两市的逐笔数据重建细节。关注细节和方法，帮助我们准确地理解数据，构造特征。</p>
+<p><code>NOTE</code>：部分代码只是为了提取数据，读者无需关注。</p>
+<h3 id="_1">上海交易所<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<h4 id="_2">逐笔委托<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
+<p>下面给出上交所的逐笔委托数据样例：</p>
+<div class="highlight"><pre><span></span><code><span class="n">order_sql</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">SELECT *</span>
+<span class="s2">FROM hfdata.stock_order</span>
+<span class="s2">WHERE tradedt = &#39;2021-12-20&#39;</span>
+<span class="s2">AND windcode = &#39;600000.SH&#39;</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="n">order_data</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">query_dataframe</span><span class="p">(</span><span class="n">order_sql</span><span class="p">)</span>
+<span class="n">order_data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</code></pre></div>
+<p>样例数据输出：</p>
+<table>
+<thead>
+<tr>
+<th>windcode</th>
+<th>tradedt</th>
+<th>tradetime</th>
+<th>bs</th>
+<th>orderprice</th>
+<th>orderqty</th>
+<th>orderno</th>
+<th>pricetype</th>
+<th>applseqnum</th>
+<th>updatetime</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>600000.SH</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:15:00.170</td>
+<td>1</td>
+<td>7.71</td>
+<td>100</td>
+<td>213</td>
+<td>0</td>
+<td>168508</td>
+<td>2022-10-28 23:03:01.450</td>
+</tr>
+<tr>
+<td>600000.SH</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:15:00.170</td>
+<td>1</td>
+<td>7.79</td>
+<td>100</td>
+<td>236</td>
+<td>0</td>
+<td>168509</td>
+<td>2022-10-28 23:03:01.450</td>
+</tr>
+<tr>
+<td>600000.SH</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:15:00.210</td>
+<td>1</td>
+<td>7.79</td>
+<td>100</td>
+<td>343</td>
+<td>0</td>
+<td>168510</td>
+<td>2022-10-28 23:03:01.450</td>
+</tr>
+<tr>
+<td>600000.SH</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:15:00.280</td>
+<td>1</td>
+<td>7.71</td>
+<td>100</td>
+<td>379</td>
+<td>0</td>
+<td>168511</td>
+<td>2022-10-28 23:03:01.450</td>
+</tr>
+<tr>
+<td>600000.SH</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:15:00.280</td>
+<td>1</td>
+<td>8.50</td>
+<td>200</td>
+<td>387</td>
+<td>0</td>
+<td>168512</td>
+<td>2022-10-28 23:03:01.450</td>
+</tr>
+</tbody>
+</table>
+<p>以 <code>order_data</code> 为例：</p>
+<ul>
+<li><code>bs</code>: 委托方向（买：<code>bs = 1</code>, 卖：<code>bs = 2</code>）</li>
+<li><code>orderprice</code>、<code>orderqty</code>: 该笔委托的价格与量</li>
+<li><code>orderno</code>: 委托订单号，即该委托的唯一编号</li>
+<li><code>pricetype</code>: <code>pricetype</code> = 10 为撤单（对上交所股票，其余 <code>pricetype</code> 取值无意义）</li>
+<li><code>applseqnum</code>: 无意义</li>
+</ul>
+<h4 id="_3">逐笔成交<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
+<p>下面给出上交所的逐笔成交数据样例：</p>
+<div class="highlight"><pre><span></span><code><span class="n">deal_sql</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">SELECT *</span>
+<span class="s2">FROM hfdata.stock_deal</span>
+<span class="s2">WHERE tradedt = &#39;2021-12-20&#39;</span>
+<span class="s2">AND windcode = &#39;600000.SH&#39;</span>
+<span class="s2">AND tradetime &gt;= toDateTime64(&#39;2021-12-20 09:30:00.000&#39;, 3)</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="n">deal_data</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">query_dataframe</span><span class="p">(</span><span class="n">deal_sql</span><span class="p">)</span>
+<span class="n">deal_data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</code></pre></div>
+<p>样例数据输出：</p>
+<table>
+<thead>
+<tr>
+<th>windcode</th>
+<th>tradedt</th>
+<th>tradetime</th>
+<th>bs</th>
+<th>tradeprice</th>
+<th>tradeqty</th>
+<th>tradeamt</th>
+<th>tradeno</th>
+<th>tradebuyno</th>
+<th>tradesellno</th>
+<th>tradetype</th>
+<th>applseqnum</th>
+<th>updatetime</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>600000.SH</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:30:01.670</td>
+<td>1</td>
+<td>8.56</td>
+<td>1</td>
+<td>8.56</td>
+<td>37528</td>
+<td>254198</td>
+<td>3156</td>
+<td>0</td>
+<td>296510</td>
+<td>2022-10-28 23:45:47.004</td>
+</tr>
+<tr>
+<td>600000.SH</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:30:01.670</td>
+<td>1</td>
+<td>8.56</td>
+<td>99</td>
+<td>847.44</td>
+<td>37529</td>
+<td>254198</td>
+<td>21113</td>
+<td>0</td>
+<td>296511</td>
+<td>2022-10-28 23:45:47.004</td>
+</tr>
+<tr>
+<td>600000.SH</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:30:01.940</td>
+<td>2</td>
+<td>8.55</td>
+<td>2132</td>
+<td>18228.60</td>
+<td>38384</td>
+<td>162577</td>
+<td>256992</td>
+<td>0</td>
+<td>299883</td>
+<td>2022-10-28 23:45:47.004</td>
+</tr>
+<tr>
+<td>600000.SH</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:30:01.940</td>
+<td>2</td>
+<td>8.55</td>
+<td>2968</td>
+<td>25376.40</td>
+<td>38385</td>
+<td>165302</td>
+<td>256992</td>
+<td>0</td>
+<td>299884</td>
+<td>2022-10-28 23:45:47.004</td>
+</tr>
+<tr>
+<td>600000.SH</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:30:02.670</td>
+<td>2</td>
+<td>8.55</td>
+<td>1600</td>
+<td>13680.00</td>
+<td>41619</td>
+<td>165302</td>
+<td>266837</td>
+<td>0</td>
+<td>311981</td>
+<td>2022-10-28 23:45:47.004</td>
+</tr>
+</tbody>
+</table>
+<p>以 <code>deal_data</code> 为例：</p>
+<ul>
+<li><code>bs</code>: 内外盘方向（外盘：<code>bs=1</code> 主买，内盘：<code>bs=2</code> 主卖）</li>
+<li><code>tradeno</code>: 逐笔成交订单号</li>
+<li><code>tradebuyno</code>、<code>tradesellno</code>: 成交双方对应委托单号</li>
+<li><code>tradetype</code>: 上交所无意义</li>
+<li><code>applseqnum</code>: 上市无意义</li>
+</ul>
+<h4 id="_4">逐笔委托与成交的关联<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
+<p>从实际交易逻辑考虑，任何一条订单的撮合与成交，一定来自买卖双方的委托单。因此，逐笔委托记录委托单方的订单号，逐笔成交记录成交双方的订单号，我们可以通过 <code>逐笔委托</code> 的 <code>orderno</code> 字段，在 <code>逐笔成交</code> 中找到对应委托单的成交情况，反之亦然。</p>
+<p>以 <code>deal_data</code> 中第一条逐笔成交为例。</p>
+<div class="highlight"><pre><span></span><code><span class="n">deal_data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div>
+<p>样例数据输出：</p>
+<table>
+<thead>
+<tr>
+<th>windcode</th>
+<th>tradedt</th>
+<th>tradetime</th>
+<th>bs</th>
+<th>tradeprice</th>
+<th>tradeqty</th>
+<th>tradeamt</th>
+<th>tradeno</th>
+<th>tradebuyno</th>
+<th>tradesellno</th>
+<th>tradetype</th>
+<th>applseqnum</th>
+<th>updatetime</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>600000.SH</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:30:01.670</td>
+<td>1</td>
+<td>8.56</td>
+<td>1</td>
+<td>8.56</td>
+<td>37528</td>
+<td>254198</td>
+<td>3156</td>
+<td>0</td>
+<td>296510</td>
+<td>2022-10-28 23:45:47.004</td>
+</tr>
+</tbody>
+</table>
+<p>该笔成交来自 <code>tradebuyno=254198</code>、<code>tradesellno=3156</code> 两笔委托的撮合。</p>
+<p>我们在 <code>逐笔委托</code> 中查看相关委托的信息。</p>
+<div class="highlight"><pre><span></span><code><span class="n">order_data</span><span class="p">[(</span><span class="n">order_data</span><span class="p">[</span><span class="s1">&#39;orderno&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">254198</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">order_data</span><span class="p">[</span><span class="s1">&#39;orderno&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">3156</span><span class="p">)]</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>windcode</th>
+<th>tradedt</th>
+<th>tradetime</th>
+<th>bs</th>
+<th>orderprice</th>
+<th>orderqty</th>
+<th>orderno</th>
+<th>pricetype</th>
+<th>applseqnum</th>
+<th>updatetime</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>600000.SH</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:15:00.500</td>
+<td>2</td>
+<td>8.56</td>
+<td>100</td>
+<td>3156</td>
+<td>0</td>
+<td>168530</td>
+<td>2022-10-28 23:03:01.450</td>
+</tr>
+</tbody>
+</table>
+<p>显然，我们在 <code>逐笔委托</code> 中定位了卖方委托单。</p>
+<p>同时，我们也发现 <code>orderno=254198</code> 委托买单并不在 <code>逐笔委托</code> 中。</p>
+<p>事实上，委托订单不会凭空消失，其原因涉及到上交所对“一次性撮合成交”的数据发送方式。</p>
+<h4 id="_5">一次性撮合成交<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
+<p>一次性撮合成交：订单发送到交易所的撮合平台后立即成交，不需要在订单簿中排队。</p>
+<p>在沪深交易所中，主要有以下情况会导致一次性撮合成交：</p>
+<ul>
+<li>市价单：直接以市价成交</li>
+<li>限价单中的主买卖单：主买（限价买单价格设为大于等于盘口卖一价），主卖（限价卖单价格设为小于等于买一价）</li>
+</ul>
+<p>如图：
+<img alt="上交所逐笔委托说明" src="../../../../image/hft_china_equity/SHSE_order_notes.png" /></p>
+<p>对于<code>一次性撮合成交</code>委托记录，上交所直接记入 <code>逐笔成交</code> 表，不记入 <code>逐笔委托</code> 表。</p>
+<ol>
+<li><u>若全部成交，则不记入逐笔委托，全部记入逐笔成交，此时委托单的委托数量为逐笔成交中对应的成交量的和。</u></li>
+</ol>
+<p>以上文 <code>tradebuyno=254198</code> 为例：</p>
+<p>该笔委托在逐笔委托 <code>order_data</code> 中无记录，在逐笔成交 <code>deal_data</code> 中有两条记录，记录在 <code>tradebuyno</code> 为买方，与两条成交记录的 <code>bs=1</code> 主买方向符合，并且 <code>tradeprice</code> 相同。</p>
+<p>在实际市场中，开盘后某买家已能够立即撮合的价格，吃掉了在集合竞价阶段剩余的卖单，包括 <code>orderno=3156</code> 和 <code>orderno=21113</code>。并且，该笔立即撮合的委托买单的总委托量应为 <code>1+99=100</code>。</p>
+<div class="highlight"><pre><span></span><code><span class="n">order_data</span><span class="p">[</span><span class="n">order_data</span><span class="p">[</span><span class="s1">&#39;orderno&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">254198</span><span class="p">]</span>
+</code></pre></div>
+<p>样例数据输出：</p>
+<table>
+<thead>
+<tr>
+<th>windcode</th>
+<th>tradedt</th>
+<th>tradetime</th>
+<th>bs</th>
+<th>orderprice</th>
+<th>orderqty</th>
+<th>orderno</th>
+<th>pricetype</th>
+<th>applseqnum</th>
+<th>updatetime</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="n">deal_data</span><span class="p">[</span><span class="n">deal_data</span><span class="p">[</span><span class="s1">&#39;tradebuyno&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">254198</span><span class="p">]</span>
+</code></pre></div>
+<p>样例数据输出：</p>
+<table>
+<thead>
+<tr>
+<th>windcode</th>
+<th>tradedt</th>
+<th>tradetime</th>
+<th>bs</th>
+<th>tradeprice</th>
+<th>tradeqty</th>
+<th>tradeamt</th>
+<th>tradeno</th>
+<th>tradebuyno</th>
+<th>tradesellno</th>
+<th>tradetype</th>
+<th>applseqnum</th>
+<th>updatetime</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>600000.SH</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:30:01.670</td>
+<td>1</td>
+<td>8.56</td>
+<td>1</td>
+<td>8.56</td>
+<td>37528</td>
+<td>254198</td>
+<td>3156</td>
+<td>0</td>
+<td>296510</td>
+<td>2022-10-28 23:45:47.004</td>
+</tr>
+<tr>
+<td>600000.SH</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:30:01.670</td>
+<td>1</td>
+<td>8.56</td>
+<td>99</td>
+<td>847.44</td>
+<td>37529</td>
+<td>254198</td>
+<td>21113</td>
+<td>0</td>
+<td>296511</td>
+<td>2022-10-28 23:45:47.004</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li><u>若部分立即成交，则先返回立即撮合成交部分的逐笔成交记录，之后再返回剩余未成交的逐笔委托记录，直到账单全部被成交，再次返回对应的逐笔成交数据。</u></li>
+</ol>
+<p>以上文案例中 <code>tradebuyno=10633404</code> 为例：</p>
+<p>该委托买单在逐笔委托中对应 <code>orderno=10633404</code> 的委托买单，其委托量 <code>orderqty=7700</code>，委托时间 <code>tradetime=14:52:31</code>，在逐笔成交中对应多条 <code>tradebuyno=10633404</code> 成交记录，累计总成交量 <code>tradeqty=10000</code>，多个委托时间 <code>14:52:31</code> 到 <code>14:52:33</code>。</p>
+<p>在实际市场中，交易者首先以 <code>orderprice=8.57</code> 价格下了 <code>orderqty=10000</code> 的买单，其中消耗了对手盘的 <code>tradeqty=2300=2000+300</code> 委托卖单，成交的方向为 <code>bs=1</code> 主买，剩余未立即成交的记入<code>逐笔委托</code>数据，并且逐笔委托的<code>tradetime</code>和逐笔成交的<code>tradetime</code>相同。未成交的部分，留在委买队列中，在 <code>tradetime=14:52:33</code> 被后续的卖单依次吃掉，此时逐笔成交的方向为 <code>bs=2</code> 主卖。</p>
+<div class="highlight"><pre><span></span><code><span class="n">order_data</span><span class="p">[</span><span class="n">order_data</span><span class="p">[</span><span class="s1">&#39;orderno&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">10633404</span><span class="p">]</span>
+</code></pre></div>
+<p>样例数据输出：</p>
+<table>
+<thead>
+<tr>
+<th>windcode</th>
+<th>tradedt</th>
+<th>tradetime</th>
+<th>bs</th>
+<th>orderprice</th>
+<th>orderqty</th>
+<th>orderno</th>
+<th>pricetype</th>
+<th>applseqnum</th>
+<th>updatetime</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>600000.SH</td>
+<td>2021-12-20</td>
+<td>2021-12-20 14:52:31.870</td>
+<td>1</td>
+<td>8.57</td>
+<td>7700</td>
+<td>10633404</td>
+<td>0</td>
+<td>16713861</td>
+<td>2022-10-28 23:03:01.450</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="n">deal_data</span><span class="p">[</span><span class="n">deal_data</span><span class="p">[</span><span class="s1">&#39;tradebuyno&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">10633404</span><span class="p">]</span>
+</code></pre></div>
+<p>样例数据输出：</p>
+<table>
+<thead>
+<tr>
+<th>windcode</th>
+<th>tradedt</th>
+<th>tradetime</th>
+<th>bs</th>
+<th>tradeprice</th>
+<th>tradeqty</th>
+<th>tradeamt</th>
+<th>tradeno</th>
+<th>tradebuyno</th>
+<th>tradesellno</th>
+<th>tradetype</th>
+<th>applseqnum</th>
+<th>updatetime</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>600000.SH</td>
+<td>2021-12-20</td>
+<td>2021-12-20 14:52:31.870</td>
+<td>1</td>
+<td>8.57</td>
+<td>2000</td>
+<td>17140.0</td>
+<td>6601958</td>
+<td>10633404</td>
+<td>10631528</td>
+<td>0</td>
+<td>16713859</td>
+<td>2022-10-28 23:45:47.004</td>
+</tr>
+<tr>
+<td>600000.SH</td>
+<td>2021-12-20</td>
+<td>2021-12-20 14:52:31.870</td>
+<td>1</td>
+<td>8.57</td>
+<td>300</td>
+<td>2571.0</td>
+<td>6601959</td>
+<td>10633404</td>
+<td>10632315</td>
+<td>0</td>
+<td>16713860</td>
+<td>2022-10-28 23:45:47.004</td>
+</tr>
+<tr>
+<td>600000.SH</td>
+<td>2021-12-20</td>
+<td>2021-12-20 14:52:32.850</td>
+<td>2</td>
+<td>8.57</td>
+<td>1000</td>
+<td>8570.0</td>
+<td>6602407</td>
+<td>10633404</td>
+<td>10634087</td>
+<td>0</td>
+<td>16714981</td>
+<td>2022-10-28 23:45:47.004</td>
+</tr>
+<tr>
+<td>600000.SH</td>
+<td>2021-12-20</td>
+<td>2021-12-20 14:52:33.190</td>
+<td>2</td>
+<td>8.57</td>
+<td>4700</td>
+<td>40279.0</td>
+<td>6602568</td>
+<td>10633404</td>
+<td>10634344</td>
+<td>0</td>
+<td>16715386</td>
+<td>2022-10-28 23:45:47.004</td>
+</tr>
+<tr>
+<td>600000.SH</td>
+<td>2021-12-20</td>
+<td>2021-12-20 14:52:33.190</td>
+<td>2</td>
+<td>8.57</td>
+<td>1000</td>
+<td>8570.0</td>
+<td>6602569</td>
+<td>10633404</td>
+<td>10634345</td>
+<td>0</td>
+<td>16715387</td>
+<td>2022-10-28 23:45:47.004</td>
+</tr>
+<tr>
+<td>600000.SH</td>
+<td>2021-12-20</td>
+<td>2021-12-20 14:52:33.190</td>
+<td>2</td>
+<td>8.57</td>
+<td>1000</td>
+<td>8570.0</td>
+<td>6602570</td>
+<td>10633404</td>
+<td>10634346</td>
+<td>0</td>
+<td>16715388</td>
+<td>2022-10-28 23:45:47.004</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<ol>
+<li><u>若全部未立即成交，并且后续每部分依次成交／一次性全部成交。首先完整记入逐笔委托记录，之后再次返回逐笔成交记录。</u></li>
+</ol>
+<p>以上文 <code>tradesellno=21113</code> 为例：在逐笔委托中对应 <code>orderno=21113</code> 委托订单，其委托量为 <code>100</code>；在逐笔成交中有两条对应记录，其 <code>tradeprice</code> 相等且和 <code>orderprice</code> 相等，并且委托总量 <code>99+1=100</code>。</p>
+<p>在实际市场中，交易者在集合竞价时未成交的委托卖单，开盘后被不同的买单依次吃掉，订单委托方向为卖单，成交的方向为主买。</p>
+<div class="highlight"><pre><span></span><code><span class="n">order_data</span><span class="p">[</span><span class="n">order_data</span><span class="p">[</span><span class="s1">&#39;orderno&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">21113</span><span class="p">]</span>
+</code></pre></div>
+<p>样例数据输出：</p>
+<table>
+<thead>
+<tr>
+<th>windcode</th>
+<th>tradedt</th>
+<th>tradetime</th>
+<th>bs</th>
+<th>orderprice</th>
+<th>orderqty</th>
+<th>orderno</th>
+<th>pricetype</th>
+<th>applseqnum</th>
+<th>updatetime</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>600000.SH</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:15:01.470</td>
+<td>2</td>
+<td>8.56</td>
+<td>100</td>
+<td>21113</td>
+<td>0</td>
+<td>168667</td>
+<td>2022-10-28 23:03:01.450</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="highlight"><pre><span></span><code><span class="n">deal_data</span><span class="p">[</span><span class="n">deal_data</span><span class="p">[</span><span class="s1">&#39;tradesellno&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">21113</span><span class="p">]</span>
+</code></pre></div>
+<p>样例数据输出：</p>
+<table>
+<thead>
+<tr>
+<th>windcode</th>
+<th>tradedt</th>
+<th>tradetime</th>
+<th>bs</th>
+<th>tradeprice</th>
+<th>tradeqty</th>
+<th>tradeamt</th>
+<th>tradeno</th>
+<th>tradebuyno</th>
+<th>tradesellno</th>
+<th>tradetype</th>
+<th>applseqnum</th>
+<th>updatetime</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>600000.SH</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:30:01.670</td>
+<td>1</td>
+<td>8.56</td>
+<td>99</td>
+<td>847.44</td>
+<td>37529</td>
+<td>254198</td>
+<td>21113</td>
+<td>0</td>
+<td>296511</td>
+<td>2022-10-28 23:45:47.004</td>
+</tr>
+<tr>
+<td>600000.SH</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:30:02.900</td>
+<td>1</td>
+<td>8.56</td>
+<td>1</td>
+<td>8.56</td>
+<td>43021</td>
+<td>270752</td>
+<td>21113</td>
+<td>0</td>
+<td>316845</td>
+<td>2022-10-28 23:45:47.004</td>
+</tr>
+</tbody>
+</table>
+<p>简单总结, 对于上交所委托订单，我们需要结合 <code>逐笔委托</code> 和 <code>逐笔成交</code>，而使用 <code>orderno</code>、<code>tradebuyno</code>、<code>tradesellno</code> 和 <code>tradetime</code> 可以帮助我们准确定位并结合订单。</p>
+<h4 id="_6">撤单<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>对于未能成交，又未被撤回的订单，交易所会在交易日结束后，自动取消这些订单并在更晚时返还金额至交易者账户。</p>
+</div>
+<p>在委托后，可以直接全部撤单，部分成交后撤全部剩余的订单。</p>
+<p>上交所对撤单数据，记入<code>逐笔委托</code>中。在<code>hfdata.stock_order</code>中标记为<code>pricetype=10</code>。</p>
+<p>上交所取重复记录，即新增委托时记录一次，撤单时再记录一次。如下案例，对<code>orderno=3939912</code>，在新增委托时记录为限价单，撤单时记录为<code>pricetype=10</code>。</p>
+<div class="highlight"><pre><span></span><code><span class="n">order_data</span><span class="p">[</span><span class="n">order_data</span><span class="p">[</span><span class="s1">&#39;orderno&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">3939912</span><span class="p">]</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>windcode</th>
+<th>tradett</th>
+<th>tradetime</th>
+<th>bs</th>
+<th>orderprice</th>
+<th>orderqty</th>
+<th>orderno</th>
+<th>pricetype</th>
+<th>applseqnum</th>
+<th>updatetime</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>7826</td>
+<td>600000.SH</td>
+<td>2021-12-20</td>
+<td>2021-12-20 10:14:00.590</td>
+<td>1</td>
+<td>8.58</td>
+<td>7600</td>
+<td>3939912</td>
+<td>0</td>
+<td>6014704</td>
+<td>2022-10-28 23:03:01.450</td>
+</tr>
+<tr>
+<td>7936</td>
+<td>600000.SH</td>
+<td>2021-12-20</td>
+<td>2021-12-20 10:15:00.340</td>
+<td>1</td>
+<td>8.58</td>
+<td>3500</td>
+<td>3939912</td>
+<td>10</td>
+<td>6093586</td>
+<td>2022-10-28 23:03:01.450</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_7">深圳交易所<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<h4 id="_8">逐笔委托<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h4>
+<p>下面给出深交所的逐笔委托数据样例：</p>
+<div class="highlight"><pre><span></span><code><span class="n">order_sql</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">SELECT *</span>
+<span class="s2">FROM</span>
+<span class="s2">    hfdata.stock_order</span>
+<span class="s2">WHERE</span>
+<span class="s2">    tradett = &#39;2021-12-20&#39;</span>
+<span class="s2">    AND windcode = &#39;000001.SZ&#39;</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="n">order_data</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">query_dataframe</span><span class="p">(</span><span class="n">order_sql</span><span class="p">)</span>
+<span class="n">order_data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>windcode</th>
+<th>tradett</th>
+<th>tradetime</th>
+<th>bs</th>
+<th>orderprice</th>
+<th>orderqty</th>
+<th>orderno</th>
+<th>pricetype</th>
+<th>applseqnum</th>
+<th>updatetime</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>000001.SZ</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:15:00</td>
+<td>1</td>
+<td>15.81</td>
+<td>100</td>
+<td>147</td>
+<td>0</td>
+<td>147</td>
+<td>2022-10-28 23:02:33.344</td>
+</tr>
+<tr>
+<td>1</td>
+<td>000001.SZ</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:15:00</td>
+<td>1</td>
+<td>15.99</td>
+<td>100</td>
+<td>355</td>
+<td>0</td>
+<td>355</td>
+<td>2022-10-28 23:02:33.344</td>
+</tr>
+<tr>
+<td>2</td>
+<td>000001.SZ</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:15:00</td>
+<td>1</td>
+<td>17.20</td>
+<td>6400</td>
+<td>357</td>
+<td>0</td>
+<td>357</td>
+<td>2022-10-28 23:02:33.344</td>
+</tr>
+<tr>
+<td>3</td>
+<td>000001.SZ</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:15:00</td>
+<td>2</td>
+<td>19.24</td>
+<td>5700</td>
+<td>533</td>
+<td>0</td>
+<td>533</td>
+<td>2022-10-28 23:02:33.344</td>
+</tr>
+<tr>
+<td>4</td>
+<td>000001.SZ</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:15:00</td>
+<td>2</td>
+<td>19.00</td>
+<td>500</td>
+<td>589</td>
+<td>0</td>
+<td>589</td>
+<td>2022-10-28 23:02:33.344</td>
+</tr>
+</tbody>
+</table>
+<h4 id="_9">逐笔成交<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h4>
+<p>下面给出深交所的逐笔成交数据样例：</p>
+<div class="highlight"><pre><span></span><code><span class="n">deal_sql</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">SELECT *</span>
+<span class="s2">FROM</span>
+<span class="s2">    hfdata.stock_deal</span>
+<span class="s2">WHERE</span>
+<span class="s2">    tradett = &#39;2021-12-20&#39;</span>
+<span class="s2">    AND windcode = &#39;000001.SZ&#39;</span>
+<span class="s2">    AND tradetime &gt;= toDateTime64(&#39;2021-12-20 09:30:00.000&#39;, 3)</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="n">deal_data</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">query_dataframe</span><span class="p">(</span><span class="n">deal_sql</span><span class="p">)</span>
+<span class="n">deal_data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>windcode</th>
+<th>tradett</th>
+<th>tradetime</th>
+<th>bs</th>
+<th>tradeprice</th>
+<th>tradeqty</th>
+<th>tradeamt</th>
+<th>tradeno</th>
+<th>tradebuyno</th>
+<th>tradesellno</th>
+<th>tradetype</th>
+<th>applseqnum</th>
+<th>updatetime</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>000001.SZ</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:30:00.020</td>
+<td>1</td>
+<td>17.56</td>
+<td>19900</td>
+<td>349444.0</td>
+<td>488264</td>
+<td>488263</td>
+<td>414189</td>
+<td>0</td>
+<td>488264</td>
+<td>2022-10-28 23:45:03.472</td>
+</tr>
+<tr>
+<td>000001.SZ</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:30:00.020</td>
+<td>2</td>
+<td>17.55</td>
+<td>500</td>
+<td>8775.0</td>
+<td>488989</td>
+<td>2231</td>
+<td>488988</td>
+<td>0</td>
+<td>488989</td>
+<td>2022-10-28 23:45:03.472</td>
+</tr>
+<tr>
+<td>000001.SZ</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:30:00.020</td>
+<td>2</td>
+<td>17.55</td>
+<td>1200</td>
+<td>21060.0</td>
+<td>488990</td>
+<td>4383</td>
+<td>488988</td>
+<td>0</td>
+<td>488990</td>
+<td>2022-10-28 23:45:03.472</td>
+</tr>
+<tr>
+<td>000001.SZ</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:30:00.020</td>
+<td>2</td>
+<td>17.55</td>
+<td>1000</td>
+<td>17550.0</td>
+<td>488991</td>
+<td>21339</td>
+<td>488988</td>
+<td>0</td>
+<td>488991</td>
+<td>2022-10-28 23:45:03.472</td>
+</tr>
+<tr>
+<td>000001.SZ</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:30:00.020</td>
+<td>2</td>
+<td>17.55</td>
+<td>1000</td>
+<td>17550.0</td>
+<td>488992</td>
+<td>62129</td>
+<td>488988</td>
+<td>0</td>
+<td>488992</td>
+<td>2022-10-28 23:45:03.472</td>
+</tr>
+</tbody>
+</table>
+<h4 id="_10">逐笔委托与成交的关联<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h4>
+<p>同样的，我们先探讨深市中逐笔委托与逐笔成交是如何关联的。</p>
+<p>在逐笔数据字段中列举的深交所开始逐笔委托与成交数据的介绍中，我们提到 <code>applSeqNum</code> 委托索引仅深交所拥有，并且深交所逐笔委托数据没有 <code>orderNo</code>。实际情况下，深交所的逐笔委托和成交共享了一个编号 — <code>applSeqNum</code> 委托索引。</p>
+<p>由上表例可以发现，本地数据库 <code>hfdata.stock_order</code> 和 <code>hfdata.stock_deal</code> 中，为了保持沪深统一，数据表使用 <code>applSeqNum</code> 填充了 <code>orderno</code>，并同沪市一样使用该字段关联 <code>tradebuyno</code> 和 <code>tradesellno</code>。</p>
+<p>同样的，<code>逐笔成交</code> 的 <code>tradeno</code> 使用对应的 <code>applseqnum</code> 填充。</p>
+<h4 id="_11">一次性撮合成交<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h4>
+<p>与上交所不同，深交所一定会发送所有的委托数据，而且 <code>order</code> 数据一定会先于其关联的 <code>trade</code> 被发送。</p>
+<p>因此，在“一次性撮合成交”情况下，不同于上交所，<code>逐笔委托</code> 数据只包含未立即成交委托的部分，深交所的 <code>逐笔委托</code> 数据是完整的。</p>
+<p>本地 <code>hfdata</code> 数据库中深交所的 <code>逐笔委托</code> 中的价格有两种标记方式：1. <code>orderprice=0</code> 2. <code>pricetype=1</code></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>具体的，列出以下两种情况及其对应的处理方法：</p>
+</div>
+<p>我们分别筛选出 <code>orderprice!=0</code> 且 <code>pricetype!=1</code> 的买卖委托数据，并通过 <code>orderno</code> 和 <code>tradebuyno</code> 获取对应的 <code>tradeprice</code>，并标注 <code>orderprice</code> 和 <code>tradeprice</code> 的关系。</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 买单</span>
+<span class="n">buy_order</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span>
+    <span class="n">order_data</span><span class="p">[(</span><span class="n">order_data</span><span class="p">[</span><span class="s1">&#39;pricetype&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">order_data</span><span class="p">[</span><span class="s1">&#39;orderprice&#39;</span><span class="p">]</span><span class="o">!=</span><span class="mi">0</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">order_data</span><span class="p">[</span><span class="s1">&#39;bs&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">)],</span>
+    <span class="n">deal_data</span><span class="p">[[</span><span class="s1">&#39;tradebuyno&#39;</span><span class="p">,</span> <span class="s1">&#39;tradeprice&#39;</span><span class="p">]],</span>
+    <span class="n">left_on</span><span class="o">=</span><span class="s1">&#39;orderno&#39;</span><span class="p">,</span>
+    <span class="n">right_on</span><span class="o">=</span><span class="s1">&#39;tradebuyno&#39;</span>
+<span class="p">)</span>
+<span class="n">buy_order</span><span class="p">[</span><span class="s1">&#39;orderprice_is_higher&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">buy_order</span><span class="p">[</span><span class="s1">&#39;orderprice&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">buy_order</span><span class="p">[</span><span class="s1">&#39;tradeprice&#39;</span><span class="p">]</span>
+<span class="n">buy_order</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>windcode</th>
+<th>tradett</th>
+<th>tradetime</th>
+<th>bs</th>
+<th>orderprice</th>
+<th>orderqty</th>
+<th>orderno</th>
+<th>pricetype</th>
+<th>applseqnum</th>
+<th>updatetime</th>
+<th>tradebuyno</th>
+<th>tradeprice</th>
+<th>orderprice_is_higher</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>000001.SZ</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:30:00.520</td>
+<td>1</td>
+<td>19.33</td>
+<td>600</td>
+<td>759654</td>
+<td>1</td>
+<td>759654</td>
+<td>2022-10-28 23:02:33.344</td>
+<td>759654</td>
+<td>17.55</td>
+<td>True</td>
+</tr>
+<tr>
+<td>000001.SZ</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:30:05.690</td>
+<td>1</td>
+<td>19.33</td>
+<td>200</td>
+<td>840162</td>
+<td>1</td>
+<td>840162</td>
+<td>2022-10-28 23:02:33.344</td>
+<td>840162</td>
+<td>17.54</td>
+<td>True</td>
+</tr>
+<tr>
+<td>000001.SZ</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:31:16.140</td>
+<td>1</td>
+<td>19.33</td>
+<td>1200</td>
+<td>1704230</td>
+<td>1</td>
+<td>1704230</td>
+<td>2022-10-28 23:02:33.344</td>
+<td>1704230</td>
+<td>17.53</td>
+<td>True</td>
+</tr>
+<tr>
+<td>000001.SZ</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:31:16.140</td>
+<td>1</td>
+<td>19.33</td>
+<td>1200</td>
+<td>1704230</td>
+<td>1</td>
+<td>1704230</td>
+<td>2022-10-28 23:02:33.344</td>
+<td>1704230</td>
+<td>17.53</td>
+<td>True</td>
+</tr>
+<tr>
+<td>000001.SZ</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:31:16.140</td>
+<td>1</td>
+<td>19.33</td>
+<td>1200</td>
+<td>1704230</td>
+<td>1</td>
+<td>1704230</td>
+<td>2022-10-28 23:02:33.344</td>
+<td>1704230</td>
+<td>17.53</td>
+<td>True</td>
+</tr>
+<tr>
+<td>000001.SZ</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:31:16.140</td>
+<td>1</td>
+<td>19.33</td>
+<td>1200</td>
+<td>1704230</td>
+<td>1</td>
+<td>1704230</td>
+<td>2022-10-28 23:02:33.344</td>
+<td>1704230</td>
+<td>17.53</td>
+<td>True</td>
+</tr>
+<tr>
+<td>000001.SZ</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:31:16.140</td>
+<td>1</td>
+<td>19.33</td>
+<td>600</td>
+<td>2582547</td>
+<td>1</td>
+<td>2582547</td>
+<td>2022-10-28 23:02:33.344</td>
+<td>2582547</td>
+<td>17.47</td>
+<td>True</td>
+</tr>
+<tr>
+<td>000001.SZ</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:32:56.390</td>
+<td>1</td>
+<td>19.33</td>
+<td>5000</td>
+<td>3949718</td>
+<td>1</td>
+<td>3949718</td>
+<td>2022-10-28 23:02:33.344</td>
+<td>3949718</td>
+<td>17.58</td>
+<td>True</td>
+</tr>
+<tr>
+<td>000001.SZ</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:36:02.450</td>
+<td>1</td>
+<td>19.33</td>
+<td>5000</td>
+<td>3949718</td>
+<td>1</td>
+<td>3949718</td>
+<td>2022-10-28 23:02:33.344</td>
+<td>3949718</td>
+<td>17.58</td>
+<td>True</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="c1"># 买单</span>
+<span class="n">sell_order</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span>
+    <span class="n">order_data</span><span class="p">[(</span><span class="n">order_data</span><span class="p">[</span><span class="s1">&#39;pricetype&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">order_data</span><span class="p">[</span><span class="s1">&#39;orderprice&#39;</span><span class="p">]</span><span class="o">!=</span><span class="mi">0</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">order_data</span><span class="p">[</span><span class="s1">&#39;bs&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">2</span><span class="p">)],</span>
+    <span class="n">deal_data</span><span class="p">[[</span><span class="s1">&#39;tradesellno&#39;</span><span class="p">,</span> <span class="s1">&#39;tradeprice&#39;</span><span class="p">]],</span>
+    <span class="n">left_on</span><span class="o">=</span><span class="s1">&#39;orderno&#39;</span><span class="p">,</span>
+    <span class="n">right_on</span><span class="o">=</span><span class="s1">&#39;tradesellno&#39;</span>
+<span class="p">)</span>
+<span class="n">sell_order</span><span class="p">[</span><span class="s1">&#39;orderprice_is_lower&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sell_order</span><span class="p">[</span><span class="s1">&#39;orderprice&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">sell_order</span><span class="p">[</span><span class="s1">&#39;tradeprice&#39;</span><span class="p">]</span>
+<span class="n">sell_order</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>windcode</th>
+<th>tradett</th>
+<th>tradetime</th>
+<th>bs</th>
+<th>orderprice</th>
+<th>orderqty</th>
+<th>orderno</th>
+<th>pricetype</th>
+<th>applseqnum</th>
+<th>updatetime</th>
+<th>tradesellno</th>
+<th>tradeprice</th>
+<th>orderprice_is_lower</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>000001.SZ</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:32:46.260</td>
+<td>2</td>
+<td>17.46</td>
+<td>14500</td>
+<td>2476530</td>
+<td>1</td>
+<td>2476530</td>
+<td>2022-10-28 23:02:33.344</td>
+<td>2476530</td>
+<td>17.46</td>
+<td>True</td>
+</tr>
+<tr>
+<td>000001.SZ</td>
+<td>2021-12-20</td>
+<td>2021-12-20 10:09:51.560</td>
+<td>2</td>
+<td>1.00</td>
+<td>15900</td>
+<td>12519021</td>
+<td>1</td>
+<td>12519021</td>
+<td>2022-10-28 23:02:33.344</td>
+<td>12519021</td>
+<td>17.53</td>
+<td>True</td>
+</tr>
+<tr>
+<td>000001.SZ</td>
+<td>2021-12-20</td>
+<td>2021-12-20 10:09:51.560</td>
+<td>2</td>
+<td>1.00</td>
+<td>15900</td>
+<td>12519021</td>
+<td>1</td>
+<td>12519021</td>
+<td>2022-10-28 23:02:33.344</td>
+<td>12519021</td>
+<td>17.53</td>
+<td>True</td>
+</tr>
+<tr>
+<td>000001.SZ</td>
+<td>2021-12-20</td>
+<td>2021-12-20 10:09:51.560</td>
+<td>2</td>
+<td>1.00</td>
+<td>15900</td>
+<td>12519021</td>
+<td>1</td>
+<td>12519021</td>
+<td>2022-10-28 23:02:33.344</td>
+<td>12519021</td>
+<td>17.53</td>
+<td>True</td>
+</tr>
+<tr>
+<td>000001.SZ</td>
+<td>2021-12-20</td>
+<td>2021-12-20 10:09:51.560</td>
+<td>2</td>
+<td>1.00</td>
+<td>15900</td>
+<td>12519021</td>
+<td>1</td>
+<td>12519021</td>
+<td>2022-10-28 23:02:33.344</td>
+<td>12519021</td>
+<td>17.53</td>
+<td>True</td>
+</tr>
+<tr>
+<td>000001.SZ</td>
+<td>2021-12-20</td>
+<td>2021-12-20 10:09:51.560</td>
+<td>2</td>
+<td>1.00</td>
+<td>15900</td>
+<td>12519021</td>
+<td>1</td>
+<td>12519021</td>
+<td>2022-10-28 23:02:33.344</td>
+<td>12519021</td>
+<td>17.53</td>
+<td>True</td>
+</tr>
+<tr>
+<td>000001.SZ</td>
+<td>2021-12-20</td>
+<td>2021-12-20 10:09:51.560</td>
+<td>2</td>
+<td>1.00</td>
+<td>15900</td>
+<td>12519021</td>
+<td>1</td>
+<td>12519021</td>
+<td>2022-10-28 23:02:33.344</td>
+<td>12519021</td>
+<td>17.53</td>
+<td>True</td>
+</tr>
+<tr>
+<td>000001.SZ</td>
+<td>2021-12-20</td>
+<td>2021-12-20 10:09:51.560</td>
+<td>2</td>
+<td>1.00</td>
+<td>15900</td>
+<td>12519021</td>
+<td>1</td>
+<td>12519021</td>
+<td>2022-10-28 23:02:33.344</td>
+<td>12519021</td>
+<td>17.53</td>
+<td>True</td>
+</tr>
+<tr>
+<td>000001.SZ</td>
+<td>2021-12-20</td>
+<td>2021-12-20 10:09:51.560</td>
+<td>2</td>
+<td>1.00</td>
+<td>15900</td>
+<td>12519021</td>
+<td>1</td>
+<td>12519021</td>
+<td>2022-10-28 23:02:33.344</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>注意到，对于 <code>pricetype=1</code> 标记、<code>orderprice!=0</code> 的例外市价单，其委托价格都分于实际市价成交价格。说明该类<code>市价单</code>是限价单中委托价格分于对手方最优价格的委托单。</p>
+<p>普通的市价单的<code>orderprice=0</code>，其实际委托价格需要逐笔成交来计算。</p>
+<p>依据市价单的<code>orderno</code>在逐笔成交中找到对应成交记录的<code>tradeprice</code>填充<code>orderprice</code>。</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 买单为例，卖单同理不赘述</span>
+<span class="n">market_order_buy</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span>
+    <span class="n">order_data</span><span class="p">[(</span><span class="n">order_data</span><span class="p">[</span><span class="s1">&#39;bs&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">order_data</span><span class="p">[</span><span class="s1">&#39;orderprice&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">)],</span>
+    <span class="n">deal_data</span><span class="p">[[</span><span class="s1">&#39;tradebuyno&#39;</span><span class="p">,</span> <span class="s1">&#39;tradeprice&#39;</span><span class="p">]],</span>
+    <span class="n">left_on</span><span class="o">=</span><span class="s1">&#39;orderno&#39;</span><span class="p">,</span>
+    <span class="n">right_on</span><span class="o">=</span><span class="s1">&#39;tradebuyno&#39;</span>
+<span class="p">)</span>
+<span class="n">market_order_buy</span><span class="p">[</span><span class="s1">&#39;real_orderprice&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">market_order_buy</span><span class="p">[</span><span class="s1">&#39;tradeprice&#39;</span><span class="p">]</span>
+<span class="n">market_order_buy</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>windcode</th>
+<th>tradett</th>
+<th>tradetime</th>
+<th>bs</th>
+<th>orderprice</th>
+<th>orderqty</th>
+<th>orderno</th>
+<th>pricetype</th>
+<th>applseqnum</th>
+<th>updatetime</th>
+<th>tradebuyno</th>
+<th>tradeprice</th>
+<th>real_orderprice</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>000001.SZ</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:30:39</td>
+<td>1</td>
+<td>0.0</td>
+<td>22000</td>
+<td>1297904</td>
+<td>1</td>
+<td>1297904</td>
+<td>2022-10-28 23:02:33.344</td>
+<td>1297904</td>
+<td>17.49</td>
+<td>17.49</td>
+</tr>
+<tr>
+<td>000001.SZ</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:30:39</td>
+<td>1</td>
+<td>0.0</td>
+<td>22000</td>
+<td>1297904</td>
+<td>1</td>
+<td>1297904</td>
+<td>2022-10-28 23:02:33.344</td>
+<td>1297904</td>
+<td>17.49</td>
+<td>17.49</td>
+</tr>
+<tr>
+<td>000001.SZ</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:30:39</td>
+<td>1</td>
+<td>0.0</td>
+<td>22000</td>
+<td>1297904</td>
+<td>1</td>
+<td>1297904</td>
+<td>2022-10-28 23:02:33.344</td>
+<td>1297904</td>
+<td>17.50</td>
+<td>17.50</td>
+</tr>
+<tr>
+<td>000001.SZ</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:30:39</td>
+<td>1</td>
+<td>0.0</td>
+<td>22000</td>
+<td>1297904</td>
+<td>1</td>
+<td>1297904</td>
+<td>2022-10-28 23:02:33.344</td>
+<td>1297904</td>
+<td>17.50</td>
+<td>17.50</td>
+</tr>
+<tr>
+<td>000001.SZ</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:30:39</td>
+<td>1</td>
+<td>0.0</td>
+<td>22000</td>
+<td>1297904</td>
+<td>1</td>
+<td>1297904</td>
+<td>2022-10-28 23:02:33.344</td>
+<td>1297904</td>
+<td>17.50</td>
+<td>17.50</td>
+</tr>
+<tr>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr>
+<td>000001.SZ</td>
+<td>2021-12-20</td>
+<td>2021-12-20 14:55:11</td>
+<td>1</td>
+<td>0.0</td>
+<td>2000</td>
+<td>34611402</td>
+<td>1</td>
+<td>34611402</td>
+<td>2022-10-28 23:02:33.344</td>
+<td>34611402</td>
+<td>17.50</td>
+<td>17.50</td>
+</tr>
+<tr>
+<td>000001.SZ</td>
+<td>2021-12-20</td>
+<td>2021-12-20 14:55:11</td>
+<td>1</td>
+<td>0.0</td>
+<td>2000</td>
+<td>34611402</td>
+<td>1</td>
+<td>34611402</td>
+<td>2022-10-28 23:02:33.344</td>
+<td>34611402</td>
+<td>17.50</td>
+<td>17.50</td>
+</tr>
+<tr>
+<td>000001.SZ</td>
+<td>2021-12-20</td>
+<td>2021-12-20 14:55:11</td>
+<td>1</td>
+<td>0.0</td>
+<td>2000</td>
+<td>34611402</td>
+<td>1</td>
+<td>34611402</td>
+<td>2022-10-28 23:02:33.344</td>
+<td>34611402</td>
+<td>17.50</td>
+<td>17.50</td>
+</tr>
+<tr>
+<td>000001.SZ</td>
+<td>2021-12-20</td>
+<td>2021-12-20 14:56:49</td>
+<td>1</td>
+<td>0.0</td>
+<td>4000</td>
+<td>34895236</td>
+<td>1</td>
+<td>34895236</td>
+<td>2022-10-28 23:02:33.344</td>
+<td>34895236</td>
+<td>17.51</td>
+<td>17.51</td>
+</tr>
+<tr>
+<td>000001.SZ</td>
+<td>2021-12-20</td>
+<td>2021-12-20 14:56:49</td>
+<td>1</td>
+<td>0.0</td>
+<td>4000</td>
+<td>34895236</td>
+<td>1</td>
+<td>34895236</td>
+<td>2022-10-28 23:02:33.344</td>
+<td>34895236</td>
+<td>17.51</td>
+<td>17.51</td>
+</tr>
+</tbody>
+</table>
+<h4 id="_12">撤单<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h4>
+<p>深交所的撤单数据在<code>逐笔成交</code>中，而非<code>逐笔委托</code>中。</p>
+<p>参考：<code>逐笔数据字段</code>的深交所原始数据接口字段，撤单记录为<code>逐笔成交</code>的 <code>ExecType=4</code>。</p>
+<p>在本地<code>hfdata.stock_deal</code>中，撤单记录为<code>tradetype=1</code>。</p>
+<p>如下面例子，当<code>tradetype=1</code>时，该逐笔成交<code>tradebuyno</code>和<code>tradesellno</code>中有一方为0，<code>tradeprice</code>和<code>tradeamt</code>都记录为0，表明该委托并未实际成交。</p>
+<p>为了获得该笔撤单委托订单的具体信息，我们以<code>tradesellno=380414</code>为例，在<code>逐笔委托</code>中查询对应的委托订单。</p>
+<p>可以发现，不同于上交所将撤单记录两次，深交所将订单委托和撤销依次记录在<code>逐笔委托</code>和<code>逐笔成交</code>，并且在<code>逐笔委托</code>中定位该订单，可以获取委托的价格等更多信息。</p>
+<div class="highlight"><pre><span></span><code><span class="n">deal_data</span><span class="p">[</span><span class="n">deal_data</span><span class="p">[</span><span class="s1">&#39;tradetype&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">order_data</span><span class="p">[</span><span class="n">order_data</span><span class="p">[</span><span class="s1">&#39;orderno&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">380414</span><span class="p">]</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>windcode</th>
+<th>tradett</th>
+<th>tradetime</th>
+<th>bs</th>
+<th>tradeprice</th>
+<th>tradeqty</th>
+<th>tradeamt</th>
+<th>tradeno</th>
+<th>tradebuyno</th>
+<th>tradesellno</th>
+<th>tradetype</th>
+<th>applseqnum</th>
+<th>updatetime</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>000001.SZ</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:30:00.040</td>
+<td>2</td>
+<td>0.0</td>
+<td>27500</td>
+<td>0.0</td>
+<td>495739</td>
+<td>0</td>
+<td>380414</td>
+<td>1</td>
+<td>495739</td>
+<td>2022-10-28 23:45:03.472</td>
+</tr>
+<tr>
+<td>000001.SZ</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:30:00.060</td>
+<td>2</td>
+<td>0.0</td>
+<td>21200</td>
+<td>0.0</td>
+<td>499440</td>
+<td>0</td>
+<td>366585</td>
+<td>1</td>
+<td>499440</td>
+<td>2022-10-28 23:45:03.472</td>
+</tr>
+<tr>
+<td>000001.SZ</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:30:00.060</td>
+<td>1</td>
+<td>0.0</td>
+<td>300</td>
+<td>0.0</td>
+<td>499488</td>
+<td>312343</td>
+<td>0</td>
+<td>0</td>
+<td>499488</td>
+<td>2022-10-28 23:45:03.472</td>
+</tr>
+<tr>
+<td>000001.SZ</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:30:00.070</td>
+<td>2</td>
+<td>0.0</td>
+<td>38300</td>
+<td>0.0</td>
+<td>501667</td>
+<td>0</td>
+<td>333671</td>
+<td>1</td>
+<td>501667</td>
+<td>2022-10-28 23:45:03.472</td>
+</tr>
+<tr>
+<td>000001.SZ</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:30:00.070</td>
+<td>2</td>
+<td>0.0</td>
+<td>200</td>
+<td>0.0</td>
+<td>502547</td>
+<td>0</td>
+<td>58395</td>
+<td>1</td>
+<td>502547</td>
+<td>2022-10-28 23:45:03.472</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="n">order_data</span><span class="p">[</span><span class="n">order_data</span><span class="p">[</span><span class="s1">&#39;orderno&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">380414</span><span class="p">]</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>windcode</th>
+<th>tradett</th>
+<th>tradetime</th>
+<th>bs</th>
+<th>orderprice</th>
+<th>orderqty</th>
+<th>orderno</th>
+<th>pricetype</th>
+<th>applseqnum</th>
+<th>updatetime</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>000001.SZ</td>
+<td>2021-12-20</td>
+<td>2021-12-20 09:24:14.090</td>
+<td>2</td>
+<td>17.58</td>
+<td>27500</td>
+<td>380414</td>
+<td>0</td>
+<td>380414</td>
+<td>2022-10-28 23:02:33.344</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_13">其余细节<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
+<h3 id="_14">实时数据的推送方式<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<h4 id="_15">沪深差异<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h4>
+<p>理论上：</p>
+<ul>
+<li>上交所：过去3秒的逐笔数据与快照数据一起打包后推送</li>
+<li>深交所：每0.01秒就推送最新的逐笔数据</li>
+</ul>
+<h4 id="_16">快照延迟<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h4>
+<p>交易所推送的快照行情具有延迟：</p>
+<ul>
+<li>9:30起，交易所每个股票的第一个快照行情的时间戳并非都是<code>9:30:00.000</code>，而是至少延迟<code>0.01</code>秒</li>
+<li>交易所快照的推送的快照中，每个股票推送的延迟都是几乎相同</li>
+<li>深交所可能认为秒级时间戳足够，按股票的存货次生成快照行情。导致小市值代码靠后的股票，交易所推送的快照行情更大延迟</li>
+<li>解决思路1：可以使用逐笔委托数据推算0.01秒的快照行情</li>
+</ul>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+  
+
+
+
+      
+    </article>
+  </div>
+
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/xu-maoxuan" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../../../../..", "features": ["navigation.tabs", "navigation.sections"], "search": "../../../../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../../../../../assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      
+        <script src="../../../../../../javascripts/katex.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+      
+    
+  </body>
+</html>
