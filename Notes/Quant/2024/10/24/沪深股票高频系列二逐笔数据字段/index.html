@@ -1231,165 +1231,33 @@
 
 
 
-  <h1>沪深股票高频系列(二)——逐笔数据字段</h1>
-
-<p>✨ 沪深股票高频系列 ✨的第二章：</p>
-<div class="codehilite"><pre><span></span><code>介绍逐笔数据的字段。这是股票高频数据与期货不同之处（国内），因此熟悉交易所的逐笔数据十分重要。
-</code></pre></div>
-
-<!-- more -->
-
-<p>不同交易所提供不同的逐笔数据表。下面首先按照沪深交易所提供的原始数据介绍字段，而作者本地数据库 <code>hfdata</code> 中的数据在前者的基础上略有不同，后续会进一步介绍（也可以选择忽略）。</p>
-<p>关于沪深交易所数据的最新完整信息，请分别登录交易所官网网站查看相关文件：</p>
-<ul>
-<li>上海证券交易所：<a href="https://www.sseinfo.com/services/assortment/document/interface/">正式接口说明书</a> 的 <code>历史数据接口说明书</code> 等。</li>
-<li>深圳证券交易所：<a href="https://www.szse.com.cn/marketServices/technicalservice/interface/">数据接口</a> 的 <code>数据接口规范</code> 等。</li>
-</ul>
-<h2 id="_1">逐笔委托<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<ul>
-<li>将沪深字段放入同一个表格中，便于地对比两者差异。字段为空表示数据中无此字段。</li>
-<li>本地 <code>hfdata</code> 数据库中的逐笔委托表，逐笔委托存储，逐笔委托存为例，沪市和深市的数据是在同一张表中。</li>
-<li>不同的团队可能会选择不同的存储方法，例如：逐笔委托和成交在一张表中。</li>
-</ul>
+<div id="mkdocs-encrypted-content" style="display:none">+hORnSB8KjqTarUFhwhxPg==;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</div>
+<div id="mkdocs-decrypted-content">
+    <form id="mkdocs-decrypt-form" class="md-content__inner md-typeset">
+        <h1>This content is protected with AES encryption. </h1>
+        <p>Contact your administrator for access to this page.</p>
+        <input class="md-input" type="password" id="mkdocs-content-password" placeholder="Password">
+        
+        <p id="mkdocs-decrypt-msg"></p>
+    </form>
 </div>
-<table>
-<thead>
-<tr>
-<th>深交所数据</th>
-<th>上交所数据</th>
-<th>字段含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>SecurityID</td>
-<td>SecurityID</td>
-<td>证券代码</td>
-</tr>
-<tr>
-<td>OrigTime</td>
-<td>TransactTime</td>
-<td>时间戳：2021-03-01 12:45:00.000</td>
-</tr>
-<tr>
-<td>Price</td>
-<td>Price</td>
-<td>委托价格</td>
-</tr>
-<tr>
-<td>OrderQty</td>
-<td>Balance</td>
-<td>委托数量</td>
-</tr>
-<tr>
-<td>Side</td>
-<td>OrderBSFlag</td>
-<td>买卖方向：沪市为 B-买 S-卖 深市为 1-买 2-卖</td>
-</tr>
-<tr>
-<td>OrderNo</td>
-<td>OrderNo</td>
-<td>委托订单号</td>
-</tr>
-<tr>
-<td>ApplSeqNum</td>
-<td></td>
-<td>委托序列号（仅深交所）</td>
-</tr>
-<tr>
-<td>ChannelNo</td>
-<td>ChannelNo</td>
-<td>频道号码</td>
-</tr>
-<tr>
-<td>OrderType</td>
-<td>OrderType</td>
-<td>委托类型：沪市为 A-委托订单（增加）、D-委托订单（删除）深市为 1-市价 2-限价 U-本方最优</td>
-</tr>
-<tr>
-<td></td>
-<td>BizIndex</td>
-<td>业务序列号，与逐笔成交关联，从 1 开始按 Channel 连续</td>
-</tr>
-<tr>
-<td></td>
-<td>OrderIndex</td>
-<td>委托序号，NUMBER 从 1 开始，按 Channel 连续</td>
-</tr>
-</tbody>
-</table>
-<p>本地数据库 <code>hfdata</code> 中，逐笔委托数据在表 <code>stock_order</code> 中。由于内容大致重复，不再详细列出。</p>
-<p>注意：数据表是包含沪深两市股票，因此部分字段并不一定是有意义的，也不一定是意义相同的。具体请参考 <code>逐笔数据重建细节</code>。</p>
-<h2 id="_2">逐笔成交<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>深交所数据</th>
-<th>上交所数据</th>
-<th>数据说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>SecurityID</td>
-<td>SecurityID</td>
-<td>证券代码</td>
-</tr>
-<tr>
-<td>ExecType</td>
-<td>TradeBSFlag</td>
-<td>成交类别：沪市为 B-外盘 S-内盘 深市为 4-撤销 F-成交</td>
-</tr>
-<tr>
-<td>OrigTime</td>
-<td>TradeTime</td>
-<td>成交时间</td>
-</tr>
-<tr>
-<td>Price</td>
-<td>TradePrice</td>
-<td>成交价格</td>
-</tr>
-<tr>
-<td>TradeQty</td>
-<td>TradeQty</td>
-<td>成交数量</td>
-</tr>
-<tr>
-<td>TradeAmount</td>
-<td>TradeAmount</td>
-<td>成交金额</td>
-</tr>
-<tr>
-<td>BidApplSeqNum</td>
-<td>BuyNo</td>
-<td>买方序号</td>
-</tr>
-<tr>
-<td>OfferApplSeqNum</td>
-<td>SellNo</td>
-<td>卖方序号</td>
-</tr>
-<tr>
-<td></td>
-<td>TradeIndex</td>
-<td>成交序号</td>
-</tr>
-<tr>
-<td></td>
-<td>BizIndex</td>
-<td>业务序列号</td>
-</tr>
-<tr>
-<td>ChannelNo</td>
-<td>ChannelNo</td>
-<td>频道代码</td>
-</tr>
-</tbody>
-</table>
-<p>同样的，逐笔成交对应本地 <code>hfdata</code> 的 <code>stock_deal</code> 表。并同样注意，沪深两市数据混合在同一数据表中，并且字段名称不代表真实含义。具体请参考 <code>逐笔数据重建细节</code>。</p>
+
+<script type="text/javascript">
+var encryptcontent_id = "encryptcontent_1";
+var encryptcontent_path = "Notes/Quant/2024/10/24/%E6%B2%AA%E6%B7%B1%E8%82%A1%E7%A5%A8%E9%AB%98%E9%A2%91%E7%B3%BB%E5%88%97%E4%BA%8C%E9%80%90%E7%AC%94%E6%95%B0%E6%8D%AE%E5%AD%97%E6%AE%B5/";
+var decryption_failure_message = "Invalid password.";
+var encryptcontent_keystore = ["oZz+euIQKgl8s9lzcUbDEw==;QLXmbA0lNZETEhQYDWwFZO1gH21BEytjpfGGgmCq8EK8cuuhM01Ab5hDU/1D2xUInyrrN19LUBwTYBwO6Xd4FKQp/lL0zCq4/rtS5t371YKeJxdS7ScDtjSPd/xgNCA+;rgFdQjzQVTm5/s4d3lCqaQ=="];
+var encryptcontent_obfuscate = 0;
+
+</script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/core.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/enc-base64.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/cipher-core.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/sha256.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/hmac.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/pbkdf2.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/aes.js"></script>
+<script type="text/javascript" src="../../../../../../assets/javascripts/decrypt-contents.js" defer></script>
 
 
 

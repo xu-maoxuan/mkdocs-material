@@ -1244,130 +1244,33 @@
 
 
 
-  <h1>沪深股票高频系列(一)——Level-2行情数据</h1>
-
-<p>✨ 沪深股票高频系列 ✨的第一章：</p>
-<div class="codehilite"><pre><span></span><code>简单介绍 Level-2 数据是什么？ 真实交易数据是什么？
-</code></pre></div>
-
-<!-- more -->
-
-<h2 id="_1">引入<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>Level-2 数据是目前证券市场最完整、颗粒度最精细的交易信息数据。</p>
-<p>下表展示不同数据的覆盖区别：</p>
-<table>
-<thead>
-<tr>
-<th>品种</th>
-<th>行情快照</th>
-<th>逐笔成交</th>
-<th>逐笔委托</th>
-<th>日 K 线</th>
-<th>分钟 K 线</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Level-1 行情</td>
-<td>√</td>
-<td></td>
-<td></td>
-<td>√</td>
-<td>√</td>
-</tr>
-<tr>
-<td>Level-2 行情</td>
-<td>√</td>
-<td>√</td>
-<td>√</td>
-<td>√</td>
-<td>√</td>
-</tr>
-<tr>
-<td>股票期权行情</td>
-<td>√</td>
-<td></td>
-<td></td>
-<td>√</td>
-<td>√</td>
-</tr>
-</tbody>
-</table>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<ul>
-<li>Level-2 中的逐笔委托虽是高频录为 0.01 s，但是对 0.01 s 的委托时点进行模糊处理，不进行详细划分。</li>
-<li>举例：<code>stock_order.tradetime</code> 字段中，一个 0.01s 切片内的时间都是相同的，不体现具体先后关系。</li>
-<li>解决方法：逐笔委托和逐笔成交通过统一编号排序，可使用该统一编号排序。借此，可以使用 0.01s 的逐笔数据还原盘口，从而提高交易所所给 5s 盘口快照的频率。</li>
-</ul>
+<div id="mkdocs-encrypted-content" style="display:none">a6lpHgzg30F2VXus19WWQA==;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</div>
+<div id="mkdocs-decrypted-content">
+    <form id="mkdocs-decrypt-form" class="md-content__inner md-typeset">
+        <h1>This content is protected with AES encryption. </h1>
+        <p>Contact your administrator for access to this page.</p>
+        <input class="md-input" type="password" id="mkdocs-content-password" placeholder="Password">
+        
+        <p id="mkdocs-decrypt-msg"></p>
+    </form>
 </div>
-<h2 id="level-2">Level-2 数据<a class="headerlink" href="#level-2" title="Permanent link">&para;</a></h2>
-<p>Level-2 数据中，依据频率划分，包括如下不同类型、不同内容的数据：</p>
-<table>
-<thead>
-<tr>
-<th>数据类型</th>
-<th>数据频率</th>
-<th>数据内容</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>分钟 K 线</td>
-<td>1 min</td>
-<td>当前全天下分钟线行情，包括开盘价、成交换、成交量</td>
-</tr>
-<tr>
-<td>盘中快照</td>
-<td>3 s</td>
-<td>十档委托行情的切片，与该时刻的委托总量和委托价格信息</td>
-</tr>
-<tr>
-<td>委托队列</td>
-<td>3 s</td>
-<td>买一卖一的委托单数，与前 50 笔委托的明细</td>
-</tr>
-<tr>
-<td>逐笔成交</td>
-<td>0.01 s</td>
-<td>一个切片内的每笔委托成交信息</td>
-</tr>
-<tr>
-<td>逐笔委托</td>
-<td>0.01 s</td>
-<td>一个切片内的每笔委托信息</td>
-</tr>
-</tbody>
-</table>
-<h3 id="_2">微观结构与订单簿<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
-<p>逐笔成交、逐笔委托数据具有最细的颗粒度。在展示真实的交易所数据之前，先简单介绍微观结构知识与订单簿结构。</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<ul>
-<li>交易者可以提交不同种类的交易单，在 A 股中还是以市价单和限价单为主：<ul>
-<li>市价单：当交易者提交市价单时，不需要指定委托价格，只需指定买卖方向和数量。系统会自动按照当前最优价格撮合。</li>
-<li>限价单：限价单的交易者必须设定买入或卖出的价格。当交易者限价单指定价格争夺不到对手方最优价格时，系统会自动按照对手方最优价格即市价成交。</li>
-</ul>
-</li>
-<li>更多的Order类型，例如 Stop Order 止损单、Fill or Kill(FOK)等，可以自行查阅或修读“金融微观结构”课程。</li>
-</ul>
-</div>
-<p>先不考虑集合竞价情况，在连续竞价中，一次完整的交易如下：</p>
-<ul>
-<li>委托：<ul>
-<li>交易者首先提交委托申请，他有两种选择：限价单和市价单。限价单会留在订单簿中增加流动性，而市价单则会吃掉对手方最优价从而消耗流动性。</li>
-</ul>
-</li>
-<li>撤单：<ul>
-<li>成功地挂单后，交易者可以选择撤单。</li>
-</ul>
-</li>
-<li>成交：<ul>
-<li>成交后，记入逐笔成交记录，并且委托单从委托队列中消失。</li>
-</ul>
-</li>
-<li>限价订单簿展示 Limit Order Book (LOB)，展示了当前时点市场每个价格上限价单的委托情况。</li>
-</ul>
+
+<script type="text/javascript">
+var encryptcontent_id = "encryptcontent_1";
+var encryptcontent_path = "Notes/Quant/2024/10/24/%E6%B2%AA%E6%B7%B1%E8%82%A1%E7%A5%A8%E9%AB%98%E9%A2%91%E7%B3%BB%E5%88%97%E4%B8%80level-2%E8%A1%8C%E6%83%85%E6%95%B0%E6%8D%AE/";
+var decryption_failure_message = "Invalid password.";
+var encryptcontent_keystore = ["oZz+euIQKgl8s9lzcUbDEw==;QLXmbA0lNZETEhQYDWwFZO1gH21BEytjpfGGgmCq8EK8cuuhM01Ab5hDU/1D2xUInyrrN19LUBwTYBwO6Xd4FKQp/lL0zCq4/rtS5t371YKeJxdS7ScDtjSPd/xgNCA+;rgFdQjzQVTm5/s4d3lCqaQ=="];
+var encryptcontent_obfuscate = 0;
+
+</script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/core.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/enc-base64.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/cipher-core.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/sha256.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/hmac.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/pbkdf2.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/aes.js"></script>
+<script type="text/javascript" src="../../../../../../assets/javascripts/decrypt-contents.js" defer></script>
 
 
 
