@@ -61,6 +61,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -1152,6 +1157,23 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      想法
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1248,19 +1270,26 @@
     </object>
 </div>
 
-<div class="highlight"><pre><span></span><code>想法：
-1. 这一套informed trade的intuition：理性投资者角度，buy 和 sell 是具有信息的。一个informed的人，会更多的执行单边的buy or sell。而一个noise traders，更多会随机的buy and sell。基于这个，PIN模型依赖的前提，是结合 Good/Bad event 和 Buy/Sell action 去做Bayes更新。到后续的VPIN表达式，也是建立在对Buy Volume和Sell Volume的信息挖掘。
-
-2. 第1点对以下几个应用角度很关键：
+<h2 id="_1">想法<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p>这一套informed trade的intuition：理性投资者角度，buy 和 sell 是具有信息的。一个informed的人，会更多的执行单边的buy or sell。而一个noise traders，更多会随机的buy and sell。基于这个，PIN模型依赖的前提，是结合 Good/Bad event 和 Buy/Sell action 去做Bayes更新。到后续的VPIN表达式，也是建立在对Buy Volume和Sell Volume的信息挖掘。</p>
+</li>
+<li>
+<p>第1点对以下几个应用角度很关键：
     2.1 VPIN无法直接用于对未来收益的预测。因为Makers盈利为Short单边趋势，Long小幅震荡，是一个straddle的钱。和Takers需要对方向作出方向判断。两者是不同的。
-    2.2 理论intuition前提，要求了市场对Buy/Sell是平等难度的，及noise trades在时序和截面上都会随机选择Buy or Sell。当在A股，T+1制度下，无信息优势的散户也会有很强的日内单边交易。
-
-3. 原文提到的设计一种 标的为VPIN的期货合约，为makers对冲风险。在查阅后，真实市场上后续没有这样的产品。有一些显然的原因：对VPIN这样的指标，指标数值太容易被机构操控。
-
-4. VPIN文章中对VPIN设计的一些实验，都很实用。尤其是VPIN有多个参数、计算算法需要选择。
-
-5. 后续可以进一步VPIN的实际应用方法。例如修改为收益预测型指标 or 作为market regime指标。
-</code></pre></div>
+    2.2 理论intuition前提，要求了市场对Buy/Sell是平等难度的，及noise trades在时序和截面上都会随机选择Buy or Sell。当在A股，T+1制度下，无信息优势的散户也会有很强的日内单边交易。</p>
+</li>
+<li>
+<p>原文提到的设计一种 标的为VPIN的期货合约，为makers对冲风险。在查阅后，真实市场上后续没有这样的产品。有一些显然的原因：对VPIN这样的指标，指标数值太容易被机构操控。</p>
+</li>
+<li>
+<p>VPIN文章中对VPIN设计的一些实验，都很实用。尤其是VPIN有多个参数、计算算法需要选择。</p>
+</li>
+<li>
+<p>后续可以进一步VPIN的实际应用方法。例如修改为收益预测型指标 or 作为market regime指标。</p>
+</li>
+</ol>
 
 
 
