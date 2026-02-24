@@ -12,6 +12,8 @@
         <link rel="prev" href="../../12/vpin-informed-traders-and-flow-toxicity/">
       
       
+        <link rel="next" href="../../23/event-study-1did%E5%AD%A6%E4%B9%A0/">
+      
       
       <link rel="icon" href="../../../../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.28">
@@ -1696,7 +1698,7 @@ rather than spurious correlations influenced by unobserved confounders or feedba
 <p>inter-trade durations 看来不是个冷门的研究切入点，不过作者将它和未来的动量 / 反转联系到一起，个人感觉对实际投研是有帮助的。</p>
 <h3 id="inter-trade-durations_1">首先，关于Inter-trade durations在实际使用中的想法<a class="headerlink" href="#inter-trade-durations_1" title="Permanent link">&para;</a></h3>
 <ol>
-<li>逐笔成交数据中，可能会出现一些durations被破变小的情况呢：<ol>
+<li>逐笔成交数据中，可能会出现一些durations被迫变小的情况：<ol>
 <li>一笔订单被拆成多次执行，导致多笔trade的记录。比如一个大买单吃掉多个小卖单，那么逐笔记录中，会出现多个durations为0，造成偏差</li>
 <li>算法交易普及，大量的中等volume订单的执行，导致durations被迫缩小</li>
 <li>Timestamp精度不够，导致durations大量爆0</li>
@@ -1731,7 +1733,7 @@ rather than spurious correlations influenced by unobserved confounders or feedba
 </ol>
 </li>
 <li>不同time horozin 对结论的影响：<ol>
-<li>原文是在日尺度上做的研究。日内分interval，然后日层面agg，最后在&#8531;/5/10/21 day的层面检验</li>
+<li>原文是在日尺度上做的研究。日内分interval，然后日层面agg，最后在1 / &#8535;/10/21 day的层面检验</li>
 <li>如果进入日内个股的层级，可能有不同的研究发现</li>
 <li>当然如果为了研究durations带来的信息如何融入market，日层级，是一个比较好的观察信息的层面</li>
 </ol>

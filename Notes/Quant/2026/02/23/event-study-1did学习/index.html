@@ -9,10 +9,8 @@
       
       
       
-        <link rel="prev" href="../%E6%B2%AA%E6%B7%B1%E8%82%A1%E7%A5%A8%E9%AB%98%E9%A2%91%E7%B3%BB%E5%88%97%E4%BA%8C%E9%80%90%E7%AC%94%E6%95%B0%E6%8D%AE%E5%AD%97%E6%AE%B5/">
+        <link rel="prev" href="../../22/inter-trade-durations%E4%B8%AD%E7%9A%84%E4%BF%A1%E6%81%AF-1/">
       
-      
-        <link rel="next" href="../../../../2025/12/25/quality-minus-junk/">
       
       
       <link rel="icon" href="../../../../../../assets/images/favicon.png">
@@ -20,7 +18,7 @@
     
     
       
-        <title>沪深股票高频系列(一)——Level-2行情数据 - xmx.Spaceship</title>
+        <title>Event Study-1：DID学习 - xmx.Spaceship</title>
       
     
     
@@ -64,7 +62,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#1-intuition" class="md-skip">
           跳转至
         </a>
       
@@ -98,7 +96,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              沪深股票高频系列(一)——Level-2行情数据
+              Event Study-1：DID学习
             
           </span>
         </div>
@@ -1166,28 +1164,100 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+  <a href="#1-intuition" class="md-nav__link">
     <span class="md-ellipsis">
-      引入
+      1. 解决的问题与方法的 Intuition
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#level-2" class="md-nav__link">
+  <a href="#2-2x2" class="md-nav__link">
     <span class="md-ellipsis">
-      Level-2 数据
+      2. 基础 2x2 回归模型及细节
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Level-2 数据">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-beta_3-did" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 核心推导：为什么 \(\beta_3\) 就是 DID？
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-twfe" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. TWFE (双向固定效应) 回归模型及细节
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-twfe-event-study" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. 从 TWFE 到 Event Study：动态效应与平行趋势检验
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. 回归检验结果与读图指南
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-robustness-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Robustness Check 稳健性检验
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. 其他核心细节
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. 其他核心细节">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#81-heterogeneity" class="md-nav__link">
     <span class="md-ellipsis">
-      微观结构与订单簿
+      8.1 异质性分析 (Heterogeneity)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-control-variables-bad-controls" class="md-nav__link">
+    <span class="md-ellipsis">
+      8.2 控制变量 Control Variables 细节：Bad Controls
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-clustered-standard-errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      8.3 聚类标准误 Clustered Standard Errors
     </span>
   </a>
   
@@ -1235,7 +1305,7 @@
                     <li class="md-nav__item">
                       <div class="md-nav__link">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5v-5Z"/></svg>
-                        <time datetime="2024-10-24 00:00:00" class="md-ellipsis">2024年10月24日</time>
+                        <time datetime="2026-02-23 00:00:00" class="md-ellipsis">2026年2月23日</time>
                       </div>
                     </li>
                     
@@ -1247,7 +1317,7 @@
                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7h1.5Z"/></svg>
                           <span class="md-ellipsis">
                             
-                              需要 1 分钟阅读时间
+                              需要 4 分钟阅读时间
                             
                           </span>
                         </div>
@@ -1273,53 +1343,207 @@
     
     
     
-      <span class="md-tag">高频交易</span>
+      <span class="md-tag">Math</span>
     
   
     
     
     
-      <span class="md-tag">股票</span>
+      <span class="md-tag">Stats</span>
     
   
     
     
     
-      <span class="md-tag">A股</span>
+      <span class="md-tag">Quant</span>
     
   
 </nav>
 
 
 
-<div id="mkdocs-encrypted-content" style="display:none">iAPMZ792j+mVlZmWnqY/5w==;nR4ldJamPGaTPDhIuI7ISZ0Bm1blp9f589XzcBXHkX1mNJCvrPmxdNeT3MnQRUgUryLdq3APg4uhiopj8/KTRmCMXPH5a21dB8cVO0mcQInXGVqQ697xFnMI020aSqPs0s3vYs9eevkWQTmvuNllRAitbK/KqbARrxVTUau2I4knCydom9DqlAxYzAkyqjOV0K2TyC2pwwk4cIZOjm8bgsvJd6onAAAXmlDDjTN9pDMmtFZsmlURKhrRNUnhGk5XpZdIjCAXkKlNnlY5GX5l5wlNmkRVaj+McWRYD0g86tuu0ykHAApK+CiOi0ZmkwyLfPTenG6WTGmp7simoFMR6uToQaPrOIHul0/AgXUIU1d4I3+KQhHOr7ckDY46lIf2TaUOYqM4BNBtBcm3qtvqwGFn8YHs4w3Q1pesn+rYw1NKElxsZYWfZ9KIeUAkj3wzrtNN/OqeI+Tk3eYq376nHNSnqFW6IFywVhcD41W/hiXD2iAb9oTYFXeHF7ptjpNDnRObYzqTW5iXy2saytF9sEwU37U9quBNuqEYFGg7eyDVN9IS5gKAare2zXDakKfM9ODAutC315QbYTfFZf1DlOmBaJS9Vo/lfAFwThT9pwGI8GO51LPRceYx7oSkU6VcBFrhCHL+GgEP3gIgoo+/7SrZG2I1KQE4UBQpGBwA7pMl8E5psz9N7eAA7EdmL3PZm9W0VRY+qanpu3/6bUPJxNJYCkdI9qm7k//nkB5XUwLnI2zENAiaYN1FAvgQxoJhdp++6vctypBkWRWuwj6Tvof8QSaG96RanHx4Gi6Yo6wxBwW1zD+X/nOv4+3bqgLift2IlVwfmi+Mxqsrds3UovDAeBvCyFw9/bqOItkN9c37KpvY1DTwsKBhm8Sa+xFur+B09L4g1hgzPndffHPVNz4ySubOvugfxQF6e2w9FsaxvhmnK1Az85/DFM01v9UOsMHsQkLEjbwVi0T/w3mSFBr1mDOi+u3qa8s6M0LXXVABgy9quws/OW3MLAbMVuhxHhZ2z9Upaaj9dbYNPuI1qJMUzgmZer4Vh/eP3MDi/OJLoyjGlo+17KBaIQCV7rqVK8atLplSLSaa7y/2dPRDJ6ed+TFQVTPw61KCxv6wTptK1xOEUiOJYFDxFfzX+TkZpcYhaZdze2Lz1AIV87tjQVVG6LvcpAMWaFV0wxGgSrBcimMQ34y0r6ZQdzEtoezKwv2S22wFH/PeT0pe+48M/Ybq+WTAht9QFJxx9IGTuePp7WcB0WvB/xMjDS/QUPfhWk7puOiXJYvwZF5mmM+ggEKBKdlxEX8W8SBJwq9kn/x45yR+L9pra3X2lyHJmjY0/2O4jyXSsI7py+eIuS7a7RvgYKjmeAGOHreq/DoHmiHlfRonptPCrCRtrS+xVQu3WqiyxUCG4X2Q/sv17NQQhLlaf82EwwX0VPXSx1bc7z/S7NChlNmWzEJ7IA28TJszhSDXaobDdNQI7Frmn/9slJUeeGxVgk6dINoVcXmuARMMiM68gZ+w5RkVu64AR3fmk1VgufB3VDWmmmcucf9xoTB8DXQ/xbYi753Cc41spLwMnxo2q49qvv6izyTe5L3Ly4wXuYNIKUMqVf8F4GuNU9mrMJJA8vRVo9vShbPaKysoagPf4SP5pBkguWnI/27wniC9aT9XuzMzmhCPxhfwfOx5xwYwtOsXfrqvAT0AoiWAGgfjGFDXnP6SGDlx0LanhiinjmXLjedNvVxIUNJ9ITR6Ko+So2WexnVVzpojF7jTLom+coEUI8jmf439vi0ZYMZYyTYDmIwoQnUOvCXKG9saiCZgReo4AoXChXWNpiHhxx7zWzxcG0+XqT404ZHCdT4z+9Sb5NrZgFORCYKDTbClNbnuIFBQJuDdup4w2xJlTsjm1w7cUSAW7sQPTW2OYEiOuK32g7MpN9Lx/Uphui3R3psxmaG0Z4fWNBTHfyt9r6f5LHbj2pGRgr/dAvHuhnlTsAxHPcQ4XJhXNbl8L2N8PYkTAuXX+znw2YJT0oX0wHUT4yX7o0eqG/7UKXyxfe1SPeeyh0G+siR9uFEw9yO/Xx14mW5soiD8LkMngPuGv2mX58KMUfe4K102lEhdUs7pOcQwkpmdOA1q2zNYwWV9HdwTZERjtRhl1tHdC7BCJLv/8tLwJ4CodVl/FgQribxhRM7cxw5mUiUg9iOREv2Ut+g/ETcxxtTlVVUx4WM0N8IsAIk9y7RFnj/sexVvX8/V6hmgNheHT7x1aHOYpgi1TBs2uQlGrSTh/A2hL2VbTiqa3TaXYhda3fkzpDG9dlixO7AWLEY6re4a3X3aEvUn7+XvpEoNXCMhTXEQpTDOdKDET4WBMOnxcLOvdUak5C21Hgjfx2W5iI8baUfzTa4e7tqh0XjHL8TbFoblIoBPKyA7ACuxdCH01roq9mGmSXMzWYLWelyJZERzM/qrc1S/xRiZ4hrDpDXZOs+L/fGVmQTjFD8aDWqZ8cv8Btct8BpLuMi4rxkf/yg3tbd+gakvg8DZRYaOA7ANRwBDy53oCm13D3TRpzE6utqr+cfhyjah+fYFV87WxlN+hiZU2txia52g7fQaMFZawaYT5LcAQQ03401UY5nAqc+a6AzA3DCeVziBcD0/nJUERz8rjQUN/TLv03MACBj8bw6FaM0tKlvyeue1lUfV1OvBzF/lK/qcW9gbDJOXmNZQKO2A7TN0r8zjJpcVy70m+8yw7xZYxnRGw15VN5bsiwhhgPWTAffg7HdGUKLublKSPicdOLdHlJPwKj7S6VsUfDsM3brHMNrN9Dd0jVPDmgCea6F9yzj3rlwRpT0zkNk1VEopfdAEsH1lg4oHSn1AGFqsl8PC+8dSn/esVDmVDW5jSb67yojOKEff1PqptVCi0bOBAfAy+a6OVOKR5SKe2L0rNQZWNKb9GdL5m59qQr18WiqalfroX2ZmLacaJFw89LOjCpc2m8k5Ue1sV9PS3MscV04tncO1HytfNAq6y5LOZV9ISYmoNB14F0DB/8rhNuDiqiR0+8rNBK8Lm3JlX7OFM5mgWydLzB3/wlJFrry7M2IDtR4TKlRWZwuq85gUPlGXV92gxAbfy0hRwuOxR6WgENliV+2B6MBMGBxy0AANqDd9ai1IeVYAX1S3eVrBrXSlskeecq/nw7aqjg+051B6Nm4ybrM44SRyS1CpxvXoIVxLjRqgXESCgWZGz+h7ZJab+yMH3sRZ3BiN6H+BpbS/guapJDth8c+BLAJnFCESjTlYbXV/1PsAHgHFerFXw7qzML14EfAv63ICoX/BMRR5UOmEfEUtXkvbykSFDweoM0LIe4EXb9EMRZRKfe87B6F13JwScKSyn45wnoAd7X/1Rt7pwuzLc/QysPZwHTpqKJENay4G/T+yjBox6t0yFVufntZR/RGBK3eKlWqGxsmqfQ36HonBQBdE/xIL3NKNYDRZb3hsNq0tFASrukwzGYJ8eVJj5jwasr8Z6z4BDaZW6zYsw5FrtlBxhQAO2tjR38ZbTWNja+5La6Doz5mgZqkQYbSzR+QhKtyAF+wm1BAaGj4Ze/+Vh12IGx3BUNul7NeNR1GCihcUe7T4imm2RmUu3SbTYXEkzR319jf5kIP2VczWjE8T/qcC7SCwHek5MfKget21z7kYcgMqH/Xduc2wJTXAlujKxn0v0ebQR9Z+PCtJ8/Agq94AhxH0ljBFgZX7To1qIKA7Oy5L9ISSgfM6B8syuNDmAJ6nOd8VA+Jku8jd2eJK9vYj+5aBzBEfRvfsycnpEc1Sa0I5vLTwI9uo0CYGHGkJK6Qp413kp3d+jpXaTAoonTt/8txF4Ti0LRIvFRI3Qee6e9GZQuUWCVx1OeiOyQaLczJMml4lAPhxcOAZlDS1p2NHYn90ntOQWxLuA4bExc6hR+/MWu6x1n252col8XAd//X66qxkQTgKXD3jqwR2XbPzn6WDOAIaWbJV/sfQaDv3aSf2m5BP91RrZ6rtdeDBVQH17rfLNwYohzsMaMjUh6H7SeQh6g0vb8Xo3YL+78j+fEy6cfw9+fjK1zik9CgYt7AS096tx7Qp0Ea92FFjGecXTj7rpi+4CYumlQpQCW1vbr7UCOoq6HdoeWJTN5ovGu/Fkmrxakon+L/r+h5cnoX48M3iWiHtPNbUBrFId949xcSKqN5C2Zo4VZVNCV8AFOXGxk0BMRByh/LrxMKMYDJVQc3k4XEywy2z5WntmVaKvDHKd+d1/0lae+Zwzdr9+rjmuvEf2cN5HLcgE77QNxz8km9L066eA4ox67ZAwBlz/2FvF2zdJQs6lMJqhXGl9EfDPAhCsSr6ptuO5z6F61o4StHrOwZvhsJ00wqtayKVSdI9ndfQdk93f6jDz6bUk5bcYlbajJH0pbUPr3tlhmjZ3J23zecGmS8f1/oImGzBCvNLoBhdS1nXg4GJ2N81ugsUWh5e3m4p2QxkSWNBbeY940xpPt/w5mND4WegDqb/OsjWjh3ziQ3GYmSeia2BoGKbn9nNpTaMt/L9YEucPoymstN/+4DJkuvItJO6P4h0kF2cloYuUF/9rJlg2vc/SpW/bF9+2STvcmk5cIC4yIgvGt+UGQVqcArkuq2pfaqiTgAmPjHTVpEeEr5yq7ahO7WCMs3IgK3IlLHNO8RZGVk5cSrt/ZMpRGk0qqifq9sKgwEmCZNV9xdgPKh92IOyf7pfTVaxlO+2Opec1B/l4J292tfI5IyXexQXyO82F6rm0QoI+dntVf/F+VxzL2nuWK0iFCwkl+spfyk4XgE/NKRT161a9eSIGc3P13Rxhn5/En25E5i07zjZZf9VHyd9YYJHzwnoGzyPE+UI4u8M9vUQXeVn+YVn28R4cT2sRHPEYmeCeHQDxSv6xwQtJFWPnuzdPwc1TZfvebS5yLYxWiCzjaiK8T/HgBHheCLqiPvN8lHmdFh1s4Nuab+1AyjIYFa5l3gqNvPF/hA2LrZEA2wxP1cWi+7isaE8BI57eHLahHLwBx2vYlxx01EmYryDbX/0nuzzkGmgMdJfbUXfe68gEKakVQcs0N7T2HJLc4pQANuGanVW7KAfnpbZR1tHCWF7xbq5Vfuq9BdKlDMR/JwJXcx5gHX6txJtGh3d5ZzvB/oOm5DQokcxNGbXCbw2+mOE5UJaKOQDQsWWRPzaugIim80bjfr+WqfuBis7QNYOnQRLgm4hdVod0jEEj+mpfEkd0vqev5uHliIAPj5Favp69Gk8no6H2wiMrBFFtZE9Ywtu5rMZXeaM1524X01f9v/DpipFRxoxJi0ZEj1A+jW14VQLVIS2+walx75ftBFt9WQk2oj9/SlEGozX9C/BK58lF9XctpQ8WlhHXLgLXAPs5SAlt/tNpjxw3jCV/7LXcI7cB1SQRIj/XutMg12un8+ZQxCpXFC7qP1No/MnZwwEQ3gBrkVm44YwCHdjCCFbBA4cm97AcCGAyidaPXvUY4B56sR+BUkLqdM=</div>
-<div id="mkdocs-decrypted-content">
-    <form id="mkdocs-decrypt-form" class="md-content__inner md-typeset">
-        <h1>This content is protected with AES encryption. </h1>
-        <p>Contact your administrator for access to this page.</p>
-        <input class="md-input" type="text" id="mkdocs-content-user" placeholder="User name">
-        <input class="md-input" type="password" id="mkdocs-content-password" placeholder="Password">
-        
-        <p id="mkdocs-decrypt-msg"></p>
-    </form>
+  <h1>Event Study-1：DID学习</h1>
+
+<p>该系列为学习Event Study的研究思想、方法、量化例子。
+本文为DID的学习帖子，包括：研究问题描述、Intuition、双向固定效益模型、平行趋势检验、Robustness检验等。</p>
+<!-- more -->
+
+<h2 id="1-intuition">1. 解决的问题与方法的 Intuition<a class="headerlink" href="#1-intuition" title="Permanent link">&para;</a></h2>
+<p><strong>核心目标：</strong> 因果推断 (Causal Inference)。在一项政策或事件发生后，剥离出“纯粹由该事件带来的净影响”，解决“反事实 (Counterfactual)”无法观测的问题。</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul>
+<li>以政策实施为例，我们希望回到一个这样的问题：<ul>
+<li>城市A颁布一个新的政策后，到底是否为城市带来了正向的帮助？</li>
+</ul>
+</li>
+<li>最理想的情况下：我们能够在<code>平行宇宙</code>中发现，城市A没颁布政策的样子<ul>
+<li>很可惜，<code>平行宇宙</code>暂时无法观测到(我去不早说！)</li>
+</ul>
+</li>
+<li>退而求其次：如果存在一个城市B，它满足这样的条件<ul>
+<li>没有颁布政策</li>
+<li>城市B和城市A是“平行的”，它们各自发展差不多</li>
+</ul>
+</li>
+<li>我们称<ul>
+<li>城市A:实验组（Treatment Group）</li>
+<li>城市B：对照组（Control Group）</li>
+</ul>
+</li>
+</ul>
 </div>
+<p><strong>直觉：做两次减法。</strong>
+上文的例子，我们其实有两个维度：是否为对照组、是否在政策颁布时间前后。
+- <strong>第一次差分（时间维度）：</strong> 实验组政策后 - 政策前。
+* - <em>缺陷：</em> 包含了政策效应 + 市场随时间自然波动的趋势。
+- <strong>第二次差分（截面维度）：</strong> 减去对照组在同一时间段前后变化。
+  - <em>结果：</em> 剔除了自然时间趋势，剩下的就是纯粹的因果效应。</p>
+<!-- ![Difference-in-Differences visual plot showing treatment and control groups with parallel trends]() -->
 
-<script type="text/javascript">
-var encryptcontent_id = "encryptcontent_1";
-var encryptcontent_path = "Notes/Quant/2024/10/24/%E6%B2%AA%E6%B7%B1%E8%82%A1%E7%A5%A8%E9%AB%98%E9%A2%91%E7%B3%BB%E5%88%97%E4%B8%80level-2%E8%A1%8C%E6%83%85%E6%95%B0%E6%8D%AE/";
-var decryption_failure_message = "Invalid password.";
-var encryptcontent_keystore = ["Sgrv2YYkiShJndrhuf8HSw==;5dLYRcbVZpMVsCMIhoh4yO+9qyv3D7OuraJUusjYLRVNWcVwvUSFQ0QYILdlnR14ONURkKTa179yzrHEcY71sk19QPTbTyd+lGC+ZeUx1zATUe2bEM1MdLLmBtXn5gsq;ngOOmcRZ6+ZudH2hMaqGOQ==;CgQblGLKpKMbrDVn4Lbm/ZEAeH2yq0M9lvbReMq/zpA="];
-var encryptcontent_obfuscate = 0;
-
-</script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/core.js"></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/enc-base64.js"></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/cipher-core.js"></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/sha256.js"></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/hmac.js"></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/pbkdf2.js"></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/aes.js"></script>
-<script type="text/javascript" src="../../../../../../assets/javascripts/decrypt-contents.js" defer></script>
+<p><strong>实验前提条件：平行趋势假设 (Parallel Trends Assumption)</strong>
+如果没有政策冲击，实验组和对照组的 <span class="arithmatex">\(Y\)</span> 值走势必须是平行的。对照组的变化完美模拟了实验组的“反事实”走势。</p>
+<hr />
+<h2 id="2-2x2">2. 基础 2x2 回归模型及细节<a class="headerlink" href="#2-2x2" title="Permanent link">&para;</a></h2>
+<div class="arithmatex">\[Y_{it} = \beta_0 + \beta_1 Treat_i + \beta_2 Post_t + \beta_3 (Treat_i \times Post_t) + \epsilon_{it}\]</div>
+<p><strong>变量解释：</strong>
+- <span class="arithmatex">\(Treat_i\)</span>: 组别虚拟变量。实验组=1，对照组=0。控制了不随时间变化的<strong>组间天生差异</strong>。</p>
+<ul>
+<li><span class="arithmatex">\(Post_t\)</span>: 时间虚拟变量。政策后=1，政策前=0。控制了随时间变化的<strong>共同宏观趋势</strong>。</li>
+<li><span class="arithmatex">\(Treat_i \times Post_t\)</span>: 交互项。仅当“实验组”且处于“政策后”时才为 1。</li>
+<li><strong><span class="arithmatex">\(\beta_3\)</span></strong>: 核心关注的因果估计量（DID Estimator）。</li>
+</ul>
+<p><em>局限性：</em> 颗粒度太粗，只能按“组别”和“前后大阶段”划分，无法控制个体层面的特定异质性和精细的年度波动。我们只划分了4个group，每个group中样本的异质性还是很强。后续的Two-way Fixed Effects中会解决这个问题。</p>
+<hr />
+<h2 id="3-beta_3-did">3. 核心推导：为什么 <span class="arithmatex">\(\beta_3\)</span> 就是 DID？<a class="headerlink" href="#3-beta_3-did" title="Permanent link">&para;</a></h2>
+<p>在 2x2 经典设定下（两组别：实验组/对照组；两时期：政策前/政策后），通过期望值矩阵可以清晰看到系数是如何被“减”出来的：</p>
+<div class="arithmatex">\[Y_{it} = \beta_0 + \beta_1 Treat_i + \beta_2 Post_t + \beta_3 (Treat_i \times Post_t) + \epsilon_{it}\]</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">组别</th>
+<th style="text-align: left;">政策前 (<span class="arithmatex">\(Post=0\)</span>)</th>
+<th style="text-align: left;">政策后 (<span class="arithmatex">\(Post=1\)</span>)</th>
+<th style="text-align: left;">前后差异 (1<sup>st</sup> Diff)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>对照组 (<span class="arithmatex">\(Treat=0\)</span>)</strong></td>
+<td style="text-align: left;"><span class="arithmatex">\(\beta_0\)</span></td>
+<td style="text-align: left;"><span class="arithmatex">\(\beta_0 + \beta_2\)</span></td>
+<td style="text-align: left;"><span class="arithmatex">\(\beta_2\)</span> (纯时间趋势)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>实验组 (<span class="arithmatex">\(Treat=1\)</span>)</strong></td>
+<td style="text-align: left;"><span class="arithmatex">\(\beta_0 + \beta_1\)</span></td>
+<td style="text-align: left;"><span class="arithmatex">\(\beta_0 + \beta_1 + \beta_2 + \beta_3\)</span></td>
+<td style="text-align: left;"><span class="arithmatex">\(\beta_2 + \beta_3\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>组间差 (2<sup>nd</sup> Diff)</strong></td>
+<td style="text-align: left;"><span class="arithmatex">\(\beta_1\)</span> (天生固有的组间差距)</td>
+<td style="text-align: left;"><span class="arithmatex">\(\beta_1 + \beta_3\)</span></td>
+<td style="text-align: left;"><strong><span class="arithmatex">\(\beta_3\)</span> (纯净的 DID 效应)</strong></td>
+</tr>
+</tbody>
+</table>
+<p>通过两次相减，常数项 <span class="arithmatex">\(\beta_0\)</span>、固有差异 <span class="arithmatex">\(\beta_1\)</span> 和共同时间趋势 <span class="arithmatex">\(\beta_2\)</span> 全部抵消，只剩 <span class="arithmatex">\(\beta_3\)</span>。</p>
+<hr />
+<h2 id="4-twfe">4. TWFE (双向固定效应) 回归模型及细节<a class="headerlink" href="#4-twfe" title="Permanent link">&para;</a></h2>
+<p>实际量化实证中最常用的基础模型（Baseline Model），将粗糙的组别分类升级为精确到个体和时间节点的控制。</p>
+<div class="arithmatex">\[Y_{it} = \alpha_i + \lambda_t + \delta D_{it} + X_{it}'\gamma + \epsilon_{it}\]</div>
+<p><strong>变量解释与改进：</strong>
+- <strong><span class="arithmatex">\(\alpha_i\)</span> (个体固定效应)：</strong> 替代了 <span class="arithmatex">\(Treat_i\)</span>。它本质上是给每个个体（如每只股票）分配一个独立的虚拟变量，吸收了该个体<strong>所有不随时间变化</strong>的固有特征（如企业注册地、上市年份）。
+- <strong><span class="arithmatex">\(\lambda_t\)</span> (时间固定效应)：</strong> 替代了 <span class="arithmatex">\(Post_t\)</span>。本质上是给每个时间点（如每个交易日/年份）分配一个独立虚拟变量，吸收了该时间点<strong>所有个体共同面对</strong>的宏观冲击（如系统性牛熊市）。
+- <strong><span class="arithmatex">\(D_{it}\)</span> (政策指示变量)：</strong> 本质是动态交互项。当个体 <span class="arithmatex">\(i\)</span> 在 <span class="arithmatex">\(t\)</span> 时刻处于政策实施状态时为 1，否则为 0。
+- <strong><span class="arithmatex">\(\delta\)</span></strong>: 最终估计出的平均因果效应。</p>
+<p><em>逻辑：</em> 剩下的异常波动归因于政策 <span class="arithmatex">\(D_{it}\)</span>。</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>上文TWFE模型形式为简写，下面给出了详细的形式</p>
+</div>
+<p><strong>模型详细的形式：</strong>
+<span class="arithmatex">\(<span class="arithmatex">\(Y_{it} = \beta_0 + \underbrace{\sum_{j=1}^{N-1} \eta_j \cdot \text{Ind\_Dummy}_{ij}}_{\text{个体固定效应 } \alpha_i} + \underbrace{\sum_{s=1}^{T-1} \tau_s \cdot \text{Time\_Dummy}_{ts}}_{\text{时间固定效应 } \lambda_t} + \delta D_{it} + X_{it}'\gamma + \epsilon_{it}\)</span>\)</span></p>
+<p><strong>公式细节拆解：</strong></p>
+<ul>
+<li><span class="arithmatex">\(\beta_0\)</span> (全局常数项)：回归的基准截距。</li>
+<li><span class="arithmatex">\(\alpha_i = \sum_{j=1}^{N-1} \eta_j \cdot \text{Ind\_Dummy}_{ij}\)</span> (个体层面的展开)：假设有 <span class="arithmatex">\(N\)</span> 个观测个体（如股票/城市），统计模型在后台实际上生成了 <span class="arithmatex">\(N-1\)</span> 个专属虚拟变量（扣除 1 个作为基准组以防止完全多重共线性，即 Dummy Trap）。<span class="arithmatex">\(\eta_j\)</span> 强行吸收了这类样本固有特征。</li>
+<li><span class="arithmatex">\(\lambda_t = \sum_{s=1}^{T-1} \tau_s \cdot \text{Time\_Dummy}_{ts}\)</span> (时间层面的展开)：也就是 <span class="arithmatex">\(\lambda_t\)</span> 的真实面目。假设数据跨越 <span class="arithmatex">\(T\)</span> 个时间周期，系统在后台生成 <span class="arithmatex">\(T-1\)</span> 个时间虚拟变量。<span class="arithmatex">\(\tau_s\)</span> 吸收了第 <span class="arithmatex">\(s\)</span> 期“所有个体共同面对”的宏观系统性冲击。</li>
+<li><span class="arithmatex">\(\delta D_{it}\)</span>： 核心的政策指示动态交互项，相当于上文的<span class="arithmatex">\(\beta_3\)</span></li>
+<li><span class="arithmatex">\(X_{it}'\gamma\)</span>：控制变量</li>
+</ul>
+<hr />
+<h2 id="5-twfe-event-study">5. 从 TWFE 到 Event Study：动态效应与平行趋势检验<a class="headerlink" href="#5-twfe-event-study" title="Permanent link">&para;</a></h2>
+<p>普通 TWFE 只能给出一个事后的“平均数”，且无法自证因果前提（事前平行）。Event Study 将 <span class="arithmatex">\(D_{it}\)</span> 细化为时间序列逐步的动态过程，是 DID 的灵魂所在。</p>
+<div class="arithmatex">\[Y_{it} = \alpha_i + \lambda_t + \sum_{k \neq -1} \beta_k D_{i, t+k} + \epsilon_{it}\]</div>
+<p><strong>模型细节：</strong>
+* <strong><span class="arithmatex">\(D_{i, t+k}\)</span> (相对时间哑变量)：</strong> 表示观测时刻 <span class="arithmatex">\(t\)</span> 距离个体 <span class="arithmatex">\(i\)</span> 受到政策冲击时刻的距离为 <span class="arithmatex">\(k\)</span> 年。
+    * <span class="arithmatex">\(k &lt; 0\)</span>: 政策实施前（用于检验平行趋势）。
+    * <span class="arithmatex">\(k \ge 0\)</span>: 政策实施后（用于观察动态效应）。
+* <strong>基准期 (Reference Period)：</strong> 必须剔除一期（通常选政策前一期，即 <span class="arithmatex">\(k = -1\)</span>）作为比较基准，防止完全多重共线性。所有的 <span class="arithmatex">\(\beta_k\)</span> 都是相对于 <span class="arithmatex">\(k=-1\)</span> 时刻的差异。</p>
+<hr />
+<h2 id="6">6. 回归检验结果与读图指南<a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
+<p>Event Study 的结果必须通过图表展示（动态效应图）。</p>
+<p>最最简单的！
+我们可以直接画趋势图，看事件前是否平行，获取基本的判断：</p>
+<p><img alt="alt text_1" src="../../../../image/event_study/1_did_parallel.png" /></p>
+<p>当你的时间点变多、截面样本变多，肉眼难以观察时，可以观察系数的渐进变化：</p>
+<p><img alt="alt text_2" src="../../../../image/event_study/1_did_trend_plot.png" />
+<strong>看置信区间是否跨过 0 轴</strong></p>
+<ol>
+<li><strong>事前看平行 ( <span class="arithmatex">\(k &lt; 0\)</span> )：</strong> 系数点必须在 0 附近波动，且 95% 置信区间<strong>必须包含 0</strong>。这意味着政策前两组无显著差异，平行趋势假设成立。如果显著偏离 0，说明存在预期效应或本身趋势不同（因果推断翻车）。</li>
+<li><strong>基准点 ( <span class="arithmatex">\(k = -1\)</span> )：</strong> 通常落在 0 上且没有置信区间。</li>
+<li><strong>事后看显著 ( <span class="arithmatex">\(k \ge 0\)</span> )：</strong> 置信区间<strong>不包含 0</strong>，说明政策产生了显著的因果影响。
+    - 若系数持续增大，说明有累积/放大效应
+    - 若逐渐回归 0，说明仅为短期冲击</li>
+</ol>
+<hr />
+<h2 id="7-robustness-check">7. Robustness Check 稳健性检验<a class="headerlink" href="#7-robustness-check" title="Permanent link">&para;</a></h2>
+<p>为了证明结论不是统计上的偶然或被其他因素干扰</p>
+<p><strong>最重要的方法：安慰剂检验 (Placebo Test)</strong>
+* <em>操作：</em> 随机打乱样本的“政策实施时间”或“受理组别”，伪造出“假政策”，重复进行 500-1000 次回归。
+* <em>读图：</em> 这上千个假回归的估计系数分布应服从均值为 0 的正态分布（钟形曲线）。真实的估计值（红线）应作为极大/极小的异常值（Outlier）远远偏离该分布。如果真系数混在假系数堆里，说明原结果是数据噪音凑出来的。</p>
+<p><strong>其他常规稳健性检验：</strong>
+* <strong>更换时间窗口：</strong> 缩短或拉长考察期。
+* <strong>样本截断/缩尾：</strong> 剔除极端值样本（如微盘股、停牌重组股）。
+* <strong>控制同期其他冲击：</strong> 排除研究窗口期内其他相关政策的干扰。</p>
+<hr />
+<h2 id="8">8. 其他核心细节<a class="headerlink" href="#8" title="Permanent link">&para;</a></h2>
+<h3 id="81-heterogeneity">8.1 异质性分析 (Heterogeneity)<a class="headerlink" href="#81-heterogeneity" title="Permanent link">&para;</a></h3>
+<p>不要止步于平均效应，进一步研究：事件对谁的作用更强
+* <em>操作方法：</em> 分样本回归（Split Sample）或引入三重交互项（DDD）。
+* <em>例如：</em> 按照市值大小分维，发现取消 T+0 机制对小市值股票的流动性打击远大于大市值股票；按信息透明度分类，发现卖空机制的引入对信息不对称严重的公司定价纠偏作用更强。</p>
+<h3 id="82-control-variables-bad-controls">8.2 控制变量 Control Variables 细节：Bad Controls<a class="headerlink" href="#82-control-variables-bad-controls" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>好控制变量：</strong> <ul>
+<li>影响 <span class="arithmatex">\(Y\)</span> 且影响受政策概率的变量，但必须是政策发生前（事前就存在的、不受政策本身影响的变量。</li>
+</ul>
+</li>
+<li><strong>坏控制变量 (Bad Controls)：</strong> <ul>
+<li>在政策实施后，本身会被政策改变的中间变量。<ul>
+<li><em>致命后果：</em> 控制中间变量会切断真实的因果传导路径，导致严重的内生性（选择偏误）和估计量缩水。</li>
+<li><em>例如：</em> 研究“降低印花税（政策）对市场波动率（Y）的影响”时，绝不能把“交易量”作为控制变量。因为印花税下降本身就会放大交易量，交易量是传导路径的一部分，将其控制住，就看不清政策的真实全貌了。通常，依赖双向固定效应 <span class="arithmatex">\(\alpha_i\)</span> 和 <span class="arithmatex">\(\lambda_t\)</span> 比盲目堆砌控制变量更严谨。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>实际操作中：</strong></p>
+<p>可以做一个<strong>时变控制变量 (Time-varying controls)</strong> 的敏感性测试：
+  跑一次不加控制变量的。跑一次加了控制变量的。
+  理想结果： 两个系数 <span class="arithmatex">\(\delta\)</span> 应该差不多。如果加了 CV 后系数突然消失了，说明你的因果关系可能全是靠这些 CV 撑起来的，或者你引入了 Bad Control。</p>
+<h3 id="83-clustered-standard-errors">8.3 聚类标准误 Clustered Standard Errors<a class="headerlink" href="#83-clustered-standard-errors" title="Permanent link">&para;</a></h3>
+<p>由于同一个体（如同一只股票）在不同时间点的残差往往高度自相关。如果假设它们是独立的，会严重低估标准误，导致 P 值虚假显著</p>
+<hr />
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul>
+<li>恭喜！我学了DID的1%的知识！</li>
+<li>进一步的深入学习，推荐一个<a href="https://psantanna.com/did-resources/">Emory老师的课件和文章</a>，我的图片也是来自于他的课件。</li>
+<li>事实上，量化研究的Event Study时，我们更多会用Abnormal Return去研究，也会设计一些指标，下一篇写Abnormal Return，再下一篇写经典的案例吧。</li>
+</ul>
+</div>
 
 
 
